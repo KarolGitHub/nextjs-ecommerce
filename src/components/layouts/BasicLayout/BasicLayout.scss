@@ -1,0 +1,16 @@
+.basic-layout {
+  min-height: 100vh;
+  background-color: $background-light;
+  .content {
+    background-color: inherit;
+    height: calc(100vh - 130px);
+    box-shadow: 0px 0px 10px 0px $border-grey-light;
+    -webkit-box-shadow: 0px 0px 10px 0px $border-grey-light;
+    -moz-box-shadow: 0px 0px 10px 0px $border-grey-light;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
