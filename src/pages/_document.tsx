@@ -54,6 +54,30 @@ const TwitterCardMetaLink = (
   <meta key="twitter:card" property="twitter:card" content="summary" />
 );
 
+const bootstrapLink = (
+  <link
+    key="bootstrapLink"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossOrigin="anonymous"></link>
+);
+
+const bootstrapScript = (
+  <script
+    key="bootstrapScript"
+    defer
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossOrigin="anonymous"></script>
+);
+const fontAwesomeScript = (
+  <script
+    key="fontAwesomeScript"
+    defer
+    src="https://kit.fontawesome.com/a076d05399.js"></script>
+);
+
 const mergedLinks = [
   OG_TitleMetaLink,
   OG_DescriptionMetaLink,
@@ -62,6 +86,9 @@ const mergedLinks = [
   TwitterTitleMetaLink,
   TwitterDescriptionMetaLink,
   TwitterCardMetaLink,
+  bootstrapLink,
+  bootstrapScript,
+  fontAwesomeScript,
 ];
 
 class MyDocument extends Document {
