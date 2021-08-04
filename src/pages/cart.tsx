@@ -4,7 +4,7 @@ import { BasicLayout, Seo } from '../components';
 
 const Cart = (): JSX.Element => {
   return (
-    <BasicLayout>
+    <BasicLayout className="cart">
       <Head>
         <Seo title="Cart" />
         <h1>Cart</h1>

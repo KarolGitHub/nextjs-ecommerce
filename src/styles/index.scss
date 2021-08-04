@@ -1,4 +1,10 @@
 @import './colors.scss';
 
 @import '../components/layouts/BasicLayout/BasicLayout.scss';
+
+@import '../pages/index.scss';
+@import '../pages/cart.scss';
+@import '../pages/products.scss';
+@import '../pages/signin.scss';
+
 @import '../components/NavBar/Navbar.scss';

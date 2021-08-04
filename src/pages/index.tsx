@@ -4,7 +4,7 @@ import { BasicLayout, Seo } from '../components';
 
 const Home = (): JSX.Element => {
   return (
-    <BasicLayout>
+    <BasicLayout className="home">
       <Head>
         <Seo />
       </Head>

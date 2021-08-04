@@ -10,17 +10,13 @@ const Navbar = (): JSX.Element => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link href={`/`}>
-          <a>
-            <Image
-              src="/logo.svg"
-              alt="logo"
-              width="60"
-              height="35"
-              className="logo"
-            />
-          </a>
-        </Link>
+        <div className="logo">
+          <Link href={`/`}>
+            <a>
+              <Image src="/logo.svg" alt="logo" width="50" height="50" />
+            </a>
+          </Link>
+        </div>
         <button
           className="navbar-toggler"
           type="button"

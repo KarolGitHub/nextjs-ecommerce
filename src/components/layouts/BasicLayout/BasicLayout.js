@@ -3,11 +3,11 @@ import React from 'react';
 import { Navbar, Footer } from '../..';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const BasicLayout = ({ children }) => {
+const BasicLayout = ({ children, className }) => {
   return (
-    <div className="container">
+    <div className={`basic-layout ${className}`}>
       <Navbar />
-      {children}
+      <div className="content">{children}</div>
       <Footer />
     </div>
   );
