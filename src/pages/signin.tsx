@@ -21,9 +21,6 @@ const SignIn = (): JSX.Element => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" className="form-text">
-            {"We'll never share your email with anyone else."}
-          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -35,7 +32,9 @@ const SignIn = (): JSX.Element => {
             id="exampleInputPassword1"
           />
         </div>
-
+        <div id="help" className="form-text mb-2">
+          {"We'll never share your credentials with anyone else."}
+        </div>
         <button type="submit" className="btn btn-dark w-100">
           Login
         </button>
