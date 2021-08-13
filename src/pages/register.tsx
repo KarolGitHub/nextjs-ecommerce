@@ -14,7 +14,6 @@ const Register: React.FC = () => {
   const { name, email, password, cf_password } = userData;
 
   const { state, dispatch } = useNotify();
-
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });

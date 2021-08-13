@@ -11,9 +11,9 @@ const Spinner: React.FC = () => {
         left: 0,
         zIndex: 9,
       }}>
-      <text fill="#fff" x="5" y="47">
-        Loading
-      </text>
+      <svg width="205" height="250" viewBox="25 25 50 50">
+        <circle cx="50" cy="50" r="20" fill="none" strokeWidth="2" />
+      </svg>
     </div>
   );
 };
