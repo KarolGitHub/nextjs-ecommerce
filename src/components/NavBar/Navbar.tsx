@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 
-const Navbar = (): JSX.Element => {
+const Navbar: React.FC = () => {
   const router = useRouter();
   const isRouteActive = (r: string) => (r === router.pathname ? 'active' : '');
 

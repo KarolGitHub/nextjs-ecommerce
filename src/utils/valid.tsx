@@ -3,7 +3,7 @@ const valid = ({
   email,
   password,
   cf_password,
-}: registerPayload): string =>
+}: RegisterPayload): string | null =>
   !name || !email || !password
     ? 'Please add all fields.'
     : !validateEmail(email)
@@ -12,7 +12,7 @@ const valid = ({
     ? 'Password must be at least 6 characters.'
     : password !== cf_password
     ? 'Confirm password did not match.'
-    : 'Unexpected error';
+    : null;
 
 const validateEmail = (email: string): boolean => {
   const re =

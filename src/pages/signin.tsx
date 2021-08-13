@@ -1,9 +1,10 @@
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
 import { BasicLayout, Seo } from '../components';
 
-const SignIn = (): JSX.Element => {
+const SignIn: React.FC = () => {
   return (
     <BasicLayout className="signin">
       <Head>

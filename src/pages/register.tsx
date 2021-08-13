@@ -3,26 +3,40 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { BasicLayout, Seo } from '../components';
+import { useNotify } from '../context/Notify';
 import valid from '../utils/valid';
+import { postData } from '../utils/fetchData';
 
 const initialState = { name: '', email: '', password: '', cf_password: '' };
 
-const Register = (): JSX.Element => {
+const Register: React.FC = () => {
   const [userData, setUserData] = useState(initialState);
   const { name, email, password, cf_password } = userData;
+
+  const { state, dispatch } = useNotify();
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errMsg = valid({ name, email, password, cf_password });
-    console.log(
-      '🚀 ~ file: register.tsx ~ line 22 ~ formSubmitHandler ~ errMsg',
-      errMsg
-    );
+
+    if (errMsg) {
+      return dispatch({ type: 'NOTIFY', payload: { error: errMsg } });
+    }
+
+    dispatch({ type: 'NOTIFY', payload: { loading: true } });
+
+    const res = await postData('auth/register', userData);
+
+    if (res.err) {
+      return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+    }
+
+    return dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
   };
 
   return (

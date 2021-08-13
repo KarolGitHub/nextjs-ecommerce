@@ -16,11 +16,5 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules", "public", ".cache"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/pages/_document.tsx",
-    "src/components/layouts/BasicLayout/BasicLayout.js"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
