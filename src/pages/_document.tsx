@@ -54,28 +54,40 @@ const TwitterCardMetaLink = (
   <meta key="twitter:card" property="twitter:card" content="summary" />
 );
 
-const bootstrapLink = (
+const bootstrapCSS = (
   <link
-    key="bootstrapLink"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    key="bootstrapCSS"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossOrigin="anonymous"></link>
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+    crossOrigin="anonymous"
+  />
 );
 
-const bootstrapScript = (
+const PopperJS = (
   <script
-    key="bootstrapScript"
+    key="PopperJS"
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
     defer
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
     crossOrigin="anonymous"></script>
 );
+
+const bootstrapJS = (
+  <script
+    key="bootstrapJS"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+    defer
+    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+    crossOrigin="anonymous"></script>
+);
+
 const fontAwesomeScript = (
   <script
     key="fontAwesomeScript"
     defer
-    src="https://kit.fontawesome.com/a076d05399.js"></script>
+    src="https://kit.fontawesome.com/a076d05399.js"
+  />
 );
 
 const mergedLinks = [
@@ -86,8 +98,9 @@ const mergedLinks = [
   TwitterTitleMetaLink,
   TwitterDescriptionMetaLink,
   TwitterCardMetaLink,
-  bootstrapLink,
-  bootstrapScript,
+  bootstrapCSS,
+  PopperJS,
+  bootstrapJS,
   fontAwesomeScript,
 ];
 

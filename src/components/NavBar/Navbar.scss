@@ -3,6 +3,14 @@
   border-bottom: 1px solid $border-dark;
   border-radius: 10px;
 }
+.avatar {
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.dropdown-menu {
+  will-change: transform;
+}
 .logo div {
   display: block !important;
 }

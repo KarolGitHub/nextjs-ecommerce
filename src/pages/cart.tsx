@@ -8,7 +8,6 @@ const Cart: React.FC = () => {
     <BasicLayout className="cart">
       <Head>
         <Seo title="Cart" />
-        <h1>Cart</h1>
       </Head>
     </BasicLayout>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useNotify } from '../../../context/Notify';
+import { useGlobalState } from '../../../context/GlobalState';
 import Spinner from '../Spinner';
 import Toast from '../Toast';
 
 const Modal: React.FC = () => {
-  const { state, dispatch } = useNotify();
+  const { state, dispatch } = useGlobalState();
   const { notify } = state;
   const closeHandler = () => dispatch({ type: 'NOTIFY', payload: {} });
 

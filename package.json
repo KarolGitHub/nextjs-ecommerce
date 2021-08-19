@@ -9,7 +9,8 @@
     "prod": "npm run build && npm run start",
     "deploy": "next build && next export",
     "lint": "eslint components lib pages store utils",
-    "lint:fix": "eslint --fix components lib pages store utils"
+    "lint:fix": "eslint --fix components lib pages store utils",
+    "autoprefixer": "autoprefixer processed \"./**/*.{css,scss}\""
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/js-cookie": "^2.2.7",
+    "@types/jsonwebtoken": "^8.5.4",
     "@types/react": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "babel-eslint": "^10.1.0",

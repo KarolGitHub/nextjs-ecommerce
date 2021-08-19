@@ -1,19 +1,24 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
+import React, { useEffect, useState } from 'react';
 
 import { BasicLayout, Seo } from '../components';
-import { useNotify } from '../context/Notify';
+import { useGlobalState } from '../context/GlobalState';
 import valid from '../utils/valid';
 import { postData } from '../utils/fetchData';
 
-const initialState = { name: '', email: '', password: '', cf_password: '' };
+const initialState = { name: '', email: '', password: '', confirmPassword: '' };
 
 const Register: React.FC = () => {
   const [userData, setUserData] = useState(initialState);
-  const { name, email, password, cf_password } = userData;
+  const { name, email, password, confirmPassword } = userData;
 
-  const { state, dispatch } = useNotify();
+  const router = useRouter();
+
+  const { state, dispatch } = useGlobalState();
+  const { auth } = state;
+
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -21,7 +26,7 @@ const Register: React.FC = () => {
 
   const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errMsg = valid({ name, email, password, cf_password });
+    const errMsg = valid({ name, email, password, confirmPassword });
 
     if (errMsg) {
       return dispatch({ type: 'NOTIFY', payload: { error: errMsg } });
@@ -37,6 +42,13 @@ const Register: React.FC = () => {
 
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
   };
+
+  useEffect(() => {
+    if (auth && Object.keys(auth).length !== 0) {
+      router.push('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return (
     <BasicLayout className="signin">
@@ -93,8 +105,8 @@ const Register: React.FC = () => {
             type="password"
             className="form-control"
             id="exampleInputPassword2"
-            name="cf_password"
-            value={cf_password}
+            name="confirmPassword"
+            value={confirmPassword}
             onChange={inputChangeHandler}
           />
         </div>

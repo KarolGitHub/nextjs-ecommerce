@@ -1,12 +1,12 @@
 import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
-import { NotifyProvider } from '../context/Notify';
+import { GlobalStateProvider } from '../context/GlobalState';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <NotifyProvider>
+    <GlobalStateProvider>
       <Component {...pageProps} />
-    </NotifyProvider>
+    </GlobalStateProvider>
   );
 }
 export default MyApp;
