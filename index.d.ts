@@ -5,7 +5,7 @@ declare type RegisterPayload = {
   confirmPassword?: string;
 };
 
-type Data = {
+type UserPayload = {
   msg?: string;
   err?: string;
   accessToken?: string;
@@ -17,6 +17,26 @@ type Data = {
     avatar: string;
     root: string;
   };
+};
+
+type ProductPayload = {
+  status?: string;
+  result?: number;
+  products?: Array;
+  err?: 'string';
+};
+
+type ProductData = {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  category: string;
+  currency: 'EUR' | 'GBP' | 'USD' | 'PLN';
+  status: 'Available' | 'Unavailable';
+  sold: number;
+  quantity: number;
 };
 
 declare type GlobalState = {

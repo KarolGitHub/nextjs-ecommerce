@@ -12,7 +12,7 @@ connectDB();
 
 const signin = async (
   request: NextApiRequest,
-  response: NextApiResponse<Data>
+  response: NextApiResponse<UserPayload>
 ): Promise<void> => {
   switch (request.method) {
     case 'POST':
@@ -23,7 +23,7 @@ const signin = async (
 
 const handler = async (
   request: NextApiRequest,
-  response: NextApiResponse<Data>
+  response: NextApiResponse<UserPayload>
 ) => {
   try {
     const { email, password } = request.body;

@@ -9,7 +9,7 @@ connectDB();
 
 const register = async (
   request: NextApiRequest,
-  response: NextApiResponse<Data>
+  response: NextApiResponse<UserPayload>
 ): Promise<void> => {
   switch (request.method) {
     case 'POST':
@@ -20,7 +20,7 @@ const register = async (
 
 const handler = async (
   request: NextApiRequest,
-  response: NextApiResponse<Data>
+  response: NextApiResponse<UserPayload>
 ) => {
   try {
     const { name, email, password, confirmPassword } = request.body;

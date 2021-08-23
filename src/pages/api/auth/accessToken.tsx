@@ -9,25 +9,28 @@ connectDB();
 
 const accessToken = async (
   request: NextApiRequest,
-  response: NextApiResponse<Data>
+  response: NextApiResponse<UserPayload>
 ): Promise<void> => {
   try {
     const refreshToken = request.cookies.refreshToken;
     const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET || '';
 
-    if (!refreshToken)
+    if (!refreshToken) {
       return response.status(400).json({ err: 'Please login' });
+    }
 
     const result: any = jwt.verify(refreshToken, refreshTokenSecret);
 
-    if (!result)
+    if (!result) {
       return response
         .status(400)
         .json({ err: 'Your token is incorrect or has expired.' });
+    }
 
     const user = await Users.findById(result.id);
-    if (!user)
+    if (!user) {
       return response.status(400).json({ err: 'User does not exist.' });
+    }
 
     const accessToken = createAccessToken({ id: user._id });
     response.json({

@@ -5,12 +5,12 @@
   "scripts": {
     "start": "next",
     "build": "next build",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "format": "prettier --single-quote --write \"./**/*.{ts,tsx,js,jsx,json}\"",
     "prod": "npm run build && npm run start",
     "deploy": "next build && next export",
     "lint": "eslint components lib pages store utils",
-    "lint:fix": "eslint --fix components lib pages store utils",
-    "autoprefixer": "autoprefixer processed \"./**/*.{css,scss}\""
+    "lint:fix": "eslint --fix components lib pages store utils"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
