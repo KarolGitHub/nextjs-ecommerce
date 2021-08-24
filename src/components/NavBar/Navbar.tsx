@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   const isRouteActive = (r: string) => (r === router.pathname ? 'active' : '');
 
   const { state, dispatch } = useGlobalState();
-  const { auth } = state;
+  const { auth, cart } = state;
 
   const handleLogout = () => {
     Cookie.remove('refreshToken', { path: 'api/auth/accessToken' });
@@ -94,7 +94,13 @@ const Navbar: React.FC = () => {
                   className={`nav-link ${isRouteActive('/cart')}`}
                   aria-current="page"
                   href="#">
-                  <i aria-hidden className="fas fa-shopping-cart"></i>
+                  <i
+                    aria-hidden
+                    className="fas fa-shopping-cart position-relative">
+                    <span className="cart-count position-absolute">
+                      {cart?.length}
+                    </span>
+                  </i>
                   Cart
                 </a>
               </Link>

@@ -1,4 +1,4 @@
-const reducers = (state: GlobalState, action: Action): {} => {
+const reducers = (state: GlobalState, action: Action): GlobalState => {
   switch (action.type) {
     case 'NOTIFY':
       return {
@@ -9,6 +9,11 @@ const reducers = (state: GlobalState, action: Action): {} => {
       return {
         ...state,
         auth: action.payload,
+      };
+    case 'ADD_TO_CART':
+      return {
+        ...state,
+        cart: action.payload,
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

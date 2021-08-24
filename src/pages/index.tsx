@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { BasicLayout, ProductItem, Seo } from '../components';
+import { BasicLayout, ProductItem } from '../components';
 import { getData } from '../utils/fetchData';
 
 type Props = {
@@ -19,7 +19,7 @@ const Home: React.FC<Props> = (props) => {
   return (
     <BasicLayout className="home">
       <Head>
-        <Seo />
+        <title>Home Page</title>
       </Head>
       <div className="products">
         {!products.length ? (

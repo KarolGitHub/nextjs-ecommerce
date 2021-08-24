@@ -24,12 +24,12 @@ const accessToken = async (
     if (!result) {
       return response
         .status(400)
-        .json({ err: 'Your token is incorrect or has expired.' });
+        .json({ err: 'Your token is incorrect or has expired' });
     }
 
     const user = await Users.findById(result.id);
     if (!user) {
-      return response.status(400).json({ err: 'User does not exist.' });
+      return response.status(400).json({ err: 'User does not exist' });
     }
 
     const accessToken = createAccessToken({ id: user._id });

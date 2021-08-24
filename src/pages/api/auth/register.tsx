@@ -32,7 +32,7 @@ const handler = async (
 
     const user = await Users.findOne({ email });
     if (user) {
-      return response.status(400).json({ err: 'This email already exists.' });
+      return response.status(400).json({ err: 'This email already exists' });
     }
 
     const passwordHash = await bcrypt.hash(password, 12);

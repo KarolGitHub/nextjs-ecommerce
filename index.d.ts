@@ -53,7 +53,7 @@ type ProductData = {
 };
 
 declare type GlobalState = {
-  notify?: { error?: string; success?: string };
+  notify: { error?: string; success?: string; loading?: boolean };
   auth?: {
     token: string;
     user: {
@@ -64,11 +64,12 @@ declare type GlobalState = {
       root: string;
     };
   };
+  cart: [];
 };
 
 declare type Action = {
-  type: 'NOTIFY' | 'AUTH';
-  payload: {};
+  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART';
+  payload: any;
 };
 
 declare type Dispatch = (action: Action) => void;

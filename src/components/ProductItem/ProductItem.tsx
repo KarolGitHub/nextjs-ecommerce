@@ -2,12 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 
 import { currencySymbol } from '../../utils/sharedVariables';
+import { useGlobalState } from '../../context/GlobalState';
+import { addToCart } from '../../store/Actions';
 
 type Props = {
   product: ProductData;
 };
 
 const ProductItem: React.FC<Props> = ({ product }) => {
+  const { state, dispatch } = useGlobalState();
+  const { cart } = state;
+
   return (
     <div className="card" style={{ width: '18rem' }}>
       <img
@@ -21,7 +26,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
           <h6 className="text-danger w-auto p-0">{`${
             currencySymbol[product.currency]
           }${product.price}`}</h6>
-          {product.status === 'Available' ? (
+          {!!product.quantity ? (
             <h6 className="text-danger w-auto p-0">
               In Stock: {product.quantity}
             </h6>
@@ -39,6 +44,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
           <button
             className="btn btn-success"
             style={{ marginLeft: '5px', flex: 1 }}
+            onClick={() => dispatch(addToCart(product, cart))}
             disabled={!product.quantity}>
             Buy
           </button>

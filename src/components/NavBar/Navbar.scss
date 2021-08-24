@@ -13,3 +13,12 @@
 .logo div {
   display: block !important;
 }
+.cart-count {
+  padding: 3px 6px;
+  background-color: $red;
+  border-radius: 50%;
+  top: -10px;
+  right: -10px;
+  color: white;
+  font-size: 14px;
+}

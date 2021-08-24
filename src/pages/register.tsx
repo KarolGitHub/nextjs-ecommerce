@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 
-import { BasicLayout, Seo } from '../components';
+import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
 import valid from '../utils/valid';
 import { postData } from '../utils/fetchData';
@@ -53,7 +53,7 @@ const Register: React.FC = () => {
   return (
     <BasicLayout className="signin">
       <Head>
-        <Seo title="Register page" />
+        <title>Register Page</title>
       </Head>
 
       <form className="mx-auto my-4" onSubmit={formSubmitHandler}>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import Cookie from 'js-cookie';
 
-import { BasicLayout, Seo } from '../components';
+import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
 import { postData } from '../utils/fetchData';
 
@@ -63,7 +63,7 @@ const SignIn: React.FC = () => {
   return (
     <BasicLayout className="signin">
       <Head>
-        <Seo title="Register page" />
+        <title>Sign In Page</title>
       </Head>
 
       <form className="mx-auto my-4" onSubmit={formSubmitHandler}>

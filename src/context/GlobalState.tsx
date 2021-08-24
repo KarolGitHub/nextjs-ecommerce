@@ -5,6 +5,7 @@ import { getData } from '../utils/fetchData';
 
 const initialState: GlobalState = {
   notify: {},
+  cart: [],
 };
 
 const GlobalStateContext = createContext<
@@ -15,7 +16,7 @@ function GlobalStateProvider({
   children,
 }: React.ReactElement | React.ReactElement[] | any): JSX.Element {
   const [state, dispatch] = useReducer(reducers, initialState);
-  const value = { state, dispatch };
+  const { cart } = state;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin');
@@ -31,8 +32,21 @@ function GlobalStateProvider({
     }
   }, []);
 
+  useEffect(() => {
+    const localStorageCart = JSON.parse(
+      localStorage.getItem('nextjs-ecommerce-cart') || ''
+    );
+
+    if (localStorageCart)
+      dispatch({ type: 'ADD_TO_CART', payload: localStorageCart });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('nextjs-ecommerce-cart', JSON.stringify(cart));
+  }, [cart]);
+
   return (
-    <GlobalStateContext.Provider value={value}>
+    <GlobalStateContext.Provider value={{ state, dispatch }}>
       {children}
     </GlobalStateContext.Provider>
   );
