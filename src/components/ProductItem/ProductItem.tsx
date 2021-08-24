@@ -1,18 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { currencySymbol } from '../../utils/sharedVariables';
+
 type Props = {
   product: ProductData;
 };
 
 const ProductItem: React.FC<Props> = ({ product }) => {
-  const currencySymbol = {
-    EUR: '€',
-    GBP: '£',
-    USD: '$',
-    PLN: 'zł',
-  };
-
   return (
     <div className="card" style={{ width: '18rem' }}>
       <img
@@ -23,18 +18,20 @@ const ProductItem: React.FC<Props> = ({ product }) => {
       <div className="card-body">
         <h5 className="card-title text-capitalize">{product.title}</h5>
         <div className="row justify-content-between mx-0 flex-nowrap">
-          <h6 className="text-danger w-auto">{`${
+          <h6 className="text-danger w-auto p-0">{`${
             currencySymbol[product.currency]
           }${product.price}`}</h6>
           {product.status === 'Available' ? (
-            <h6 className="text-danger w-auto">In Stock: {product.quantity}</h6>
+            <h6 className="text-danger w-auto p-0">
+              In Stock: {product.quantity}
+            </h6>
           ) : (
-            <h6 className="text-danger w-auto">Out of stock</h6>
+            <h6 className="text-danger w-auto p-0">Out of Stock</h6>
           )}
         </div>
         <p className="card-text">{product.description}</p>
         <div className="row justify-content-between mx-0">
-          <Link href={`product/${product.id}`}>
+          <Link href={`/product/${product._id}`}>
             <a className="btn btn-info" style={{ marginRight: '5px', flex: 1 }}>
               View
             </a>

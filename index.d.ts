@@ -20,14 +20,27 @@ type UserPayload = {
 };
 
 type ProductPayload = {
+  product?: Array;
+  err?: string;
+  msg?: string;
+};
+
+type ProductsPayload = {
   status?: string;
   result?: number;
   products?: Array;
-  err?: 'string';
+  err?: string;
+};
+
+type AuthPayload = {
+  err?: string;
+  id?: string;
+  role?: string;
+  root?: string;
 };
 
 type ProductData = {
-  id: string;
+  _id: string;
   title: string;
   price: number;
   description: string;

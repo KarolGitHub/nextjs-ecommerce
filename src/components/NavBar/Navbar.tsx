@@ -30,7 +30,8 @@ const Navbar: React.FC = () => {
           role="button"
           id="navbarDropdownMenuLink"
           data-bs-toggle="dropdown"
-          aria-expanded="false">
+          aria-expanded="false"
+          style={{ padding: '0.3rem 0.2rem' }}>
           <Image
             className="avatar"
             src={auth.user.avatar}

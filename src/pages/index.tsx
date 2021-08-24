@@ -26,7 +26,7 @@ const Home: React.FC<Props> = (props) => {
           <h2>No Products</h2>
         ) : (
           products.map((product) => (
-            <ProductItem key={product.id} product={product} />
+            <ProductItem key={product._id} product={product} />
           ))
         )}
       </div>

@@ -7,25 +7,28 @@ connectDB();
 
 const product = async (
   request: NextApiRequest,
-  response: NextApiResponse<ProductsPayload>
+  response: NextApiResponse<ProductPayload>
 ): Promise<void> => {
   switch (request.method) {
     case 'GET':
-      await getProducts(request, response);
+      await getProduct(request, response);
       break;
   }
 };
 
-const getProducts = async (
+const getProduct = async (
   request: NextApiRequest,
-  response: NextApiResponse<ProductsPayload>
+  response: NextApiResponse<ProductPayload>
 ) => {
   try {
-    const products = await Products.find();
-    response.json({
-      status: 'success',
-      products,
-    });
+    const { id } = request.query;
+
+    const product = await Products.findById(id);
+    if (!product) {
+      return response.status(400).json({ err: 'This product does not exist.' });
+    }
+
+    response.json({ product });
   } catch (err) {
     return response.status(500).json({ err: err.message });
   }
