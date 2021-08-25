@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 
 import { getData } from '../../utils/fetchData';
-import { BasicLayout, Seo } from '../../components';
+import { BasicLayout } from '../../components';
 import { GetServerSideProps } from 'next';
 import { currencySymbol } from '../../utils/sharedVariables';
 import { useGlobalState } from '../../context/GlobalState';

@@ -8,7 +8,12 @@ import { useGlobalState } from '../context/GlobalState';
 import valid from '../utils/valid';
 import { postData } from '../utils/fetchData';
 
-const initialState = { name: '', email: '', password: '', confirmPassword: '' };
+const initialState: RegisterPayload = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
 const Register: React.FC = () => {
   const [userData, setUserData] = useState(initialState);

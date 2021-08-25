@@ -8,7 +8,10 @@ import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
 import { postData } from '../utils/fetchData';
 
-const initialState = { email: '', password: '' };
+const initialState: LoginPayload = {
+  email: '',
+  password: '',
+};
 
 const SignIn: React.FC = () => {
   const [userData, setUserData] = useState(initialState);

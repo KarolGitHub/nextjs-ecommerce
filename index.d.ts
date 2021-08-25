@@ -1,43 +1,46 @@
-declare type RegisterPayload = {
-  name?: string;
+type RegisterPayload = {
+  name: string;
   email: string;
   password: string;
-  confirmPassword?: string;
+  confirmPassword: string;
 };
 
-type UserPayload = {
-  msg?: string;
-  err?: string;
-  accessToken?: string;
-  refreshToken?: string;
-  user?: {
+type LoginPayload = Pick<RegisterPayload, 'email' | 'password'>;
+interface UserPayloadInterface {
+  msg: string;
+  err: string;
+  accessToken: string;
+  refreshToken: string;
+  user: {
     name: string;
     email: string;
     role: string;
     avatar: string;
     root: string;
   };
-};
+}
+type UserPayload = Partial<UserPayloadInterface>;
+interface ProductPayloadInterface {
+  product: Array;
+  err: string;
+  msg: string;
+}
+type ProductPayload = Partial<ProductPayloadInterface>;
+interface ProductsPayloadInterface {
+  status: string;
+  result: number;
+  products: Array;
+  err: string;
+}
+type ProductsPayload = Partial<ProductsPayloadInterface>;
 
-type ProductPayload = {
-  product?: Array;
-  err?: string;
-  msg?: string;
-};
-
-type ProductsPayload = {
-  status?: string;
-  result?: number;
-  products?: Array;
-  err?: string;
-};
-
-type AuthPayload = {
-  err?: string;
-  id?: string;
-  role?: string;
-  root?: string;
-};
+interface AuthPayloadInterface {
+  err: string;
+  id: string;
+  role: string;
+  root: string;
+}
+type AuthPayload = Partial<AuthPayloadInterface>;
 
 type ProductData = {
   _id: string;
@@ -52,7 +55,7 @@ type ProductData = {
   quantity: number;
 };
 
-declare type GlobalState = {
+type GlobalState = {
   notify: { error?: string; success?: string; loading?: boolean };
   auth?: {
     token: string;
@@ -67,9 +70,9 @@ declare type GlobalState = {
   cart: [];
 };
 
-declare type Action = {
+type Action = {
   type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART';
-  payload: any;
+  payload: {} | [];
 };
 
-declare type Dispatch = (action: Action) => void;
+type Dispatch = (action: Action) => void;

@@ -14,7 +14,7 @@ export const getData = async (url: string, token = ''): Promise<any> => {
 
 export const postData = async (
   url: string,
-  post: RegisterPayload,
+  post: RegisterPayload | LoginPayload,
   token = ''
 ): Promise<any> => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
