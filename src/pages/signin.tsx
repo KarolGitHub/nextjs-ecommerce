@@ -84,6 +84,7 @@ const SignIn: React.FC = () => {
             onChange={inputChangeHandler}
           />
         </div>
+
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
@@ -97,12 +98,15 @@ const SignIn: React.FC = () => {
             onChange={inputChangeHandler}
           />
         </div>
+
         <div id="help" className="form-text mb-2">
           {"We'll never share your credentials with anyone else."}
         </div>
+
         <button type="submit" className="btn btn-dark w-100">
           Login
         </button>
+
         <p className="my-2">
           {"You don't have an account?"}
           <Link href="/signin">

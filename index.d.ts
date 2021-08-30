@@ -53,6 +53,7 @@ type ProductData = {
   status: 'Available' | 'Unavailable';
   sold: number;
   quantity: number;
+  amount: number;
 };
 
 type GlobalState = {
@@ -67,12 +68,12 @@ type GlobalState = {
       root: string;
     };
   };
-  cart: [];
+  cart: ProductData[];
 };
 
 type Action = {
   type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART';
-  payload: {} | [];
+  payload: any;
 };
 
 type Dispatch = (action: Action) => void;

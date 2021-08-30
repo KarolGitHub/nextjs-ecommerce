@@ -22,7 +22,13 @@ function GlobalStateProvider({
     const firstLogin = localStorage.getItem('firstLogin');
     if (firstLogin) {
       getData('auth/accessToken').then((response) => {
-        if (response.error) return localStorage.removeItem('firstLogin');
+        if (response.err) {
+          localStorage.removeItem('firstLogin');
+          return dispatch({
+            type: 'NOTIFY',
+            payload: { error: response.err },
+          });
+        }
 
         dispatch({
           type: 'AUTH',

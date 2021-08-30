@@ -11,12 +11,12 @@ const product = async (
 ): Promise<void> => {
   switch (request.method) {
     case 'GET':
-      await getProducts(request, response);
+      await getAllProducts(request, response);
       break;
   }
 };
 
-const getProducts = async (
+const getAllProducts = async (
   request: NextApiRequest,
   response: NextApiResponse<ProductsPayload>
 ) => {

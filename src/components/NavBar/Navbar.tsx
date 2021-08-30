@@ -40,11 +40,14 @@ const Navbar: React.FC = () => {
             height="30"></Image>
           {auth.user.name}
         </a>
+
         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a className="dropdown-item" href="#">
             Profile
           </a>
+
           <div className="dropdown-divider"></div>
+
           <button className="dropdown-item" onClick={handleLogout}>
             Logout
           </button>
@@ -74,6 +77,7 @@ const Navbar: React.FC = () => {
             </a>
           </Link>
         </div>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -84,6 +88,7 @@ const Navbar: React.FC = () => {
           aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div
           className="collapse navbar-collapse justify-content-end"
           id="navbarNavDropdown">
@@ -98,7 +103,7 @@ const Navbar: React.FC = () => {
                     aria-hidden
                     className="fas fa-shopping-cart position-relative">
                     <span className="cart-count position-absolute">
-                      {cart?.length}
+                      {cart.length}
                     </span>
                   </i>
                   Cart
