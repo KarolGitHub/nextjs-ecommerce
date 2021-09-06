@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Navbar, Footer, Modal } from '../..';
+import { Navbar, Footer, Popup } from '../..';
 
 type Props = {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ const BasicLayout: React.FC<Props> = ({ children, className }) => {
   return (
     <div className={`basic-layout ${className}`}>
       <Navbar />
-      <Modal />
+      <Popup />
       <div className="content">{children}</div>
       <Footer />
     </div>

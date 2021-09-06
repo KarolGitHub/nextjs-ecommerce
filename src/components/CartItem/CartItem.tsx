@@ -17,8 +17,7 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
   return (
     <tr className="row card mb-3">
       <td className="d-flex sm:flex-nowrap">
-        <div
-          style={{ minWidth: '40px', maxWidth: '100px', marginRight: '1rem' }}>
+        <div className="mx-2" style={{ minWidth: '40px', maxWidth: '100px' }}>
           <img
             src={item.imageUrl}
             alt={item.imageUrl}
@@ -70,7 +69,7 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
             </div>
 
             <button
-              className="pointer-event ml-1"
+              className="pointer-event mx-2"
               onClick={() => dispatch(deleteItem(cart, item._id))}>
               <i
                 className="far fa-trash-alt text-danger"

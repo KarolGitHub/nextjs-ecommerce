@@ -59,7 +59,7 @@ const Cart: React.FC = () => {
       </Head>
 
       <div className="row mx-auto">
-        <div className="col-md-8 text-secondary table-responsive my-3 overflow-auto">
+        <div className="col-md-8 text-secondary table-responsive my-3 overflow-auto  p-0">
           <h2 className="text-uppercase">Shopping Cart</h2>
 
           <table className="table my-3" style={{ maxWidth: '400px' }}>
