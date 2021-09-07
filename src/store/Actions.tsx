@@ -46,7 +46,11 @@ export const decreaseItemAmount = (
   return { type: 'ADD_TO_CART', payload: newItems };
 };
 
-export const deleteItem = (items: ProductData[], id: string): Action => {
-  const newItems = items.filter((item) => item._id !== id);
-  return { type: 'ADD_TO_CART', payload: newItems };
+export const deleteItem = (
+  type: Action['type'],
+  items?: ProductData[],
+  id?: string
+): Action => {
+  const newItems = items?.filter((item) => item._id !== id);
+  return { type, payload: newItems };
 };

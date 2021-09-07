@@ -56,8 +56,17 @@ type ProductData = {
   amount: number;
 };
 
+interface ModalInterface {
+  type: 'ADD_TO_CART' | 'ADD_MODAL';
+  title: string;
+  id: string;
+  data: ProductData[];
+}
+type ModalPayload = Partial<ModalInterface>;
+
 type GlobalState = {
   notify: { error?: string; success?: string; loading?: boolean };
+  cart: ProductData[];
   auth?: {
     token: string;
     user: {
@@ -68,11 +77,11 @@ type GlobalState = {
       root: string;
     };
   };
-  cart: ProductData[];
+  modal: ModalPayload;
 };
 
 type Action = {
-  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART';
+  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART' | 'ADD_MODAL';
   payload: any;
 };
 

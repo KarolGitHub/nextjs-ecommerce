@@ -5,6 +5,7 @@ import { getData } from '../utils/fetchData';
 
 const initialState: GlobalState = {
   notify: {},
+  modal: {},
   cart: [],
 };
 

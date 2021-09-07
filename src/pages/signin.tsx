@@ -109,7 +109,7 @@ const SignIn: React.FC = () => {
 
         <p className="my-2">
           {"You don't have an account?"}
-          <Link href="/signin">
+          <Link href="/register">
             <a className="text-danger "> Register Now</a>
           </Link>
         </p>

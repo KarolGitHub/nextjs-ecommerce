@@ -1,11 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import {
-  decreaseItemAmount,
-  deleteItem,
-  increaseItemAmount,
-} from '../../store/Actions';
+import { decreaseItemAmount, increaseItemAmount } from '../../store/Actions';
 
 type Props = {
   item: ProductData;
@@ -43,7 +39,9 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
                 <p className="mb-1 text-danger">Out of Stock</p>
               )}
 
-              <div className="input-group flex-nowrap">
+              <div
+                className="input-group flex-nowrap"
+                style={{ maxWidth: '170px' }}>
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -70,11 +68,19 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
 
             <button
               className="pointer-event mx-2"
-              onClick={() => dispatch(deleteItem(cart, item._id))}>
+              onClick={() =>
+                dispatch({
+                  type: 'ADD_MODAL',
+                  payload: { data: cart, id: item._id, title: item.title },
+                })
+              }>
               <i
                 className="far fa-trash-alt text-danger"
                 aria-hidden="true"
-                style={{ fontSize: '18px' }}></i>
+                style={{ fontSize: '18px' }}
+                data-bs-toggle="modal"
+                data-bs-target="#Modal"
+              />
             </button>
           </div>
         </div>

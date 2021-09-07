@@ -15,6 +15,11 @@ const reducers = (state: GlobalState, action: Action): GlobalState => {
         ...state,
         cart: action.payload,
       };
+    case 'ADD_MODAL':
+      return {
+        ...state,
+        modal: action.payload,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
