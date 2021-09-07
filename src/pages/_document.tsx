@@ -89,6 +89,12 @@ const fontAwesomeScript = (
     src="https://kit.fontawesome.com/a076d05399.js"
   />
 );
+const PaypalUrlScript = (
+  <script
+    key="PaypalUrlScript"
+    defer
+    src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`}></script>
+);
 
 const mergedLinks = [
   OG_TitleMetaLink,
@@ -102,6 +108,7 @@ const mergedLinks = [
   PopperJS,
   bootstrapJS,
   fontAwesomeScript,
+  PaypalUrlScript,
 ];
 
 class MyDocument extends Document {

@@ -6,3 +6,4 @@ export { default as Popup } from './UI/Popup/Popup';
 export { default as Modal } from './UI/Modal/Modal';
 export { default as ProductItem } from './ProductItem/ProductItem';
 export { default as CartItem } from './CartItem/CartItem';
+export { default as PaypalButton } from './PaypalButton/PaypalButton';

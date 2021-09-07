@@ -26,7 +26,7 @@ const Register: React.FC = () => {
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setUserData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const formSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
