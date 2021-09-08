@@ -1,3 +1,26 @@
+type Action = {
+  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART' | 'ADD_MODAL';
+  payload: any;
+};
+
+type Dispatch = (action: Action) => void;
+
+type GlobalState = {
+  notify: { error?: string; success?: string; loading?: boolean };
+  cart: ProductData[];
+  auth?: {
+    token: string;
+    user: {
+      name: string;
+      email: string;
+      role: string;
+      avatar: string;
+      root: string;
+    };
+  };
+  modal: ModalPayload;
+};
+
 type RegisterPayload = {
   name: string;
   email: string;
@@ -55,7 +78,6 @@ type ProductData = {
   quantity: number;
   amount: number;
 };
-
 interface ModalInterface {
   type: 'ADD_TO_CART' | 'ADD_MODAL';
   title: string;
@@ -63,26 +85,3 @@ interface ModalInterface {
   data: ProductData[];
 }
 type ModalPayload = Partial<ModalInterface>;
-
-type GlobalState = {
-  notify: { error?: string; success?: string; loading?: boolean };
-  cart: ProductData[];
-  auth?: {
-    token: string;
-    user: {
-      name: string;
-      email: string;
-      role: string;
-      avatar: string;
-      root: string;
-    };
-  };
-  modal: ModalPayload;
-};
-
-type Action = {
-  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART' | 'ADD_MODAL';
-  payload: any;
-};
-
-type Dispatch = (action: Action) => void;

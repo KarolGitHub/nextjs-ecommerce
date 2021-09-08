@@ -35,10 +35,10 @@ const Home: React.FC<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await getData('product');
+  const res = await getData('product');
   return {
     props: {
-      products: response.products,
+      products: res.products,
     },
   };
 };

@@ -6,28 +6,28 @@ import Products from '../../../models/productsModel';
 connectDB();
 
 const product = async (
-  request: NextApiRequest,
-  response: NextApiResponse<ProductsPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<ProductsPayload>
 ): Promise<void> => {
-  switch (request.method) {
+  switch (req.method) {
     case 'GET':
-      await getAllProducts(request, response);
+      await getAllProducts(req, res);
       break;
   }
 };
 
 const getAllProducts = async (
-  request: NextApiRequest,
-  response: NextApiResponse<ProductsPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<ProductsPayload>
 ) => {
   try {
     const products = await Products.find();
-    response.json({
+    res.json({
       status: 'success',
       products,
     });
   } catch (err) {
-    return response.status(500).json({ err: err.message });
+    return res.status(500).json({ err: (err as any).message });
   }
 };
 

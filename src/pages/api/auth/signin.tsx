@@ -11,37 +11,37 @@ import {
 connectDB();
 
 const signin = async (
-  request: NextApiRequest,
-  response: NextApiResponse<UserPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<UserPayload>
 ): Promise<void> => {
-  switch (request.method) {
+  switch (req.method) {
     case 'POST':
-      await handler(request, response);
+      await handler(req, res);
       break;
   }
 };
 
 const handler = async (
-  request: NextApiRequest,
-  response: NextApiResponse<UserPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<UserPayload>
 ) => {
   try {
-    const { email, password } = request.body;
+    const { email, password } = req.body;
 
     const user = await Users.findOne({ email });
     if (!user) {
-      return response.status(400).json({ err: 'This user does not exist' });
+      return res.status(400).json({ err: 'This user does not exist' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return response.status(400).json({ err: 'Incorrect password' });
+      return res.status(400).json({ err: 'Incorrect password' });
     }
 
     const accessToken = createAccessToken({ id: user._id });
     const refreshToken = createRefreshToken({ id: user._id });
 
-    response.json({
+    res.json({
       msg: 'Login Successful',
       accessToken,
       refreshToken,
@@ -54,7 +54,7 @@ const handler = async (
       },
     });
   } catch (err) {
-    return response.status(500).json({ err: err.message });
+    return res.status(500).json({ err: (err as any).message });
   }
 };
 

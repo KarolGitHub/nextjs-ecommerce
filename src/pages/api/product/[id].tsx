@@ -6,31 +6,31 @@ import Products from '../../../models/productsModel';
 connectDB();
 
 const product = async (
-  request: NextApiRequest,
-  response: NextApiResponse<ProductPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<ProductPayload>
 ): Promise<void> => {
-  switch (request.method) {
+  switch (req.method) {
     case 'GET':
-      await getProduct(request, response);
+      await getProduct(req, res);
       break;
   }
 };
 
 const getProduct = async (
-  request: NextApiRequest,
-  response: NextApiResponse<ProductPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<ProductPayload>
 ) => {
   try {
-    const { id } = request.query;
+    const { id } = req.query;
 
     const product = await Products.findById(id);
     if (!product) {
-      return response.status(400).json({ err: 'This product does not exist' });
+      return res.status(400).json({ err: 'This product does not exist' });
     }
 
-    response.json({ product });
+    res.json({ product });
   } catch (err) {
-    return response.status(500).json({ err: err.message });
+    return res.status(500).json({ err: (err as any).message });
   }
 };
 

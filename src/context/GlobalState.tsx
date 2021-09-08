@@ -22,18 +22,18 @@ function GlobalStateProvider({
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin');
     if (firstLogin) {
-      getData('auth/accessToken').then((response) => {
-        if (response.err) {
+      getData('auth/accessToken').then((res) => {
+        if (res.err) {
           localStorage.removeItem('firstLogin');
           return dispatch({
             type: 'NOTIFY',
-            payload: { error: response.err },
+            payload: { error: res.err },
           });
         }
 
         dispatch({
           type: 'AUTH',
-          payload: { token: response.accessToken, user: response.user },
+          payload: { token: res.accessToken, user: res.user },
         });
       });
     }

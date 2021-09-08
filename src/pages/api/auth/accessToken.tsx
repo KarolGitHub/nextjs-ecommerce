@@ -8,32 +8,32 @@ import { createAccessToken } from '../../../utils/generateToken';
 connectDB();
 
 const accessToken = async (
-  request: NextApiRequest,
-  response: NextApiResponse<UserPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<UserPayload>
 ): Promise<void> => {
   try {
-    const refreshToken = request.cookies.refreshToken;
+    const refreshToken = req.cookies.refreshToken;
     const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET || '';
 
     if (!refreshToken) {
-      return response.status(400).json({ err: 'Please login' });
+      return res.status(400).json({ err: 'Please login' });
     }
 
     const result: any = jwt.verify(refreshToken, refreshTokenSecret);
 
     if (!result) {
-      return response
+      return res
         .status(400)
         .json({ err: 'Your token is incorrect or has expired' });
     }
 
     const user = await Users.findById(result.id);
     if (!user) {
-      return response.status(400).json({ err: 'User does not exist' });
+      return res.status(400).json({ err: 'User does not exist' });
     }
 
     const accessToken = createAccessToken({ id: user._id });
-    response.json({
+    res.json({
       accessToken,
       user: {
         name: user.name,
@@ -44,7 +44,7 @@ const accessToken = async (
       },
     });
   } catch (err) {
-    return response.status(500).json({ err: err.message });
+    return res.status(500).json({ err: (err as any).message });
   }
 };
 

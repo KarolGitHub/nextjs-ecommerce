@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { useGlobalState } from '../../context/GlobalState';
+import { postData } from '../../utils/fetchData';
 
 const PaypalButton = ({ order }) => {
   const refPaypalBtn = useRef();
-  const { totalPrice, shippingData } = order;
+
+  const { state, dispatch } = useGlobalState();
+  const { auth } = state;
 
   useEffect(() => {
     paypal
@@ -12,21 +16,36 @@ const PaypalButton = ({ order }) => {
             purchase_units: [
               {
                 amount: {
-                  value: totalPrice,
+                  value: order.totalPrice + '',
                 },
               },
             ],
           });
         },
         onApprove: function (data, actions) {
+          dispatch({ type: 'NOTIFY', payload: { loading: true } });
+
           return actions.order.capture().then(function (details) {
-            alert('Transaction completed by ' + details.payer.name.given_name);
+            postData(`order`, { ...order }, auth.token).then((res) => {
+              if (res.err) {
+                return dispatch({
+                  type: 'NOTIFY',
+                  payload: { error: res.err },
+                });
+              }
+
+              dispatch({ type: 'ADD_TO_CART', payload: [] });
+
+              return dispatch({
+                type: 'NOTIFY',
+                payload: { success: res.msg },
+              });
+            });
           });
         },
       })
       .render(refPaypalBtn.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [order]);
 
   return <div ref={refPaypalBtn}></div>;
 };

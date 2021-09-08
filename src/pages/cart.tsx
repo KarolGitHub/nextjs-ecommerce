@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { BasicLayout, CartItem, PaypalButton } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import { getData, postData } from '../utils/fetchData';
+import { getData } from '../utils/fetchData';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useGlobalState();
@@ -132,7 +132,7 @@ const Cart: React.FC = () => {
           </h3>
 
           {payment ? (
-            <PaypalButton order={{ totalPrice, shippingData }} />
+            <PaypalButton order={{ totalPrice, ...shippingData, cart }} />
           ) : (
             <Link href={auth?.user ? '#!' : '/signin'}>
               <a className="btn btn-dark my-2" onClick={paymentHandler}>

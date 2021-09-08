@@ -135,11 +135,11 @@ const DetailProduct: React.FC<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await getData(`product/${context.params?.id}`);
+  const res = await getData(`product/${context.params?.id}`);
 
   return {
     props: {
-      product: response.product,
+      product: res.product,
     },
   };
 };

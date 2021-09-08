@@ -8,31 +8,31 @@ import bcrypt from 'bcrypt';
 connectDB();
 
 const register = async (
-  request: NextApiRequest,
-  response: NextApiResponse<UserPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<UserPayload>
 ): Promise<void> => {
-  switch (request.method) {
+  switch (req.method) {
     case 'POST':
-      await handler(request, response);
+      await handler(req, res);
       break;
   }
 };
 
 const handler = async (
-  request: NextApiRequest,
-  response: NextApiResponse<UserPayload>
+  req: NextApiRequest,
+  res: NextApiResponse<UserPayload>
 ) => {
   try {
-    const { name, email, password, confirmPassword } = request.body;
+    const { name, email, password, confirmPassword } = req.body;
 
     const errMsg = valid({ name, email, password, confirmPassword });
     if (errMsg) {
-      return response.status(400).json({ err: errMsg });
+      return res.status(400).json({ err: errMsg });
     }
 
     const user = await Users.findOne({ email });
     if (user) {
-      return response.status(400).json({ err: 'This email already exists' });
+      return res.status(400).json({ err: 'This email already exists' });
     }
 
     const passwordHash = await bcrypt.hash(password, 12);
@@ -45,9 +45,9 @@ const handler = async (
     });
 
     await newUser.save();
-    response.json({ msg: 'Register Successful' });
+    res.json({ msg: 'Register Successful' });
   } catch (err) {
-    return response.status(500).json({ err: err.message });
+    return res.status(500).json({ err: (err as any).message });
   }
 };
 
