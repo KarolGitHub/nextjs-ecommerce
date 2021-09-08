@@ -69,7 +69,7 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <BasicLayout className="cart">
+    <BasicLayout className="cart-page">
       <Head>
         <title>Cart Page</title>
       </Head>

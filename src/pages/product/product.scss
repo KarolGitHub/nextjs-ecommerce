@@ -1,0 +1,9 @@
+.product-page {
+  .img-thumbnail {
+    -o-object-fit: contain;
+    object-fit: contain;
+  }
+  .img-thumbnail.active {
+    border: 1px solid $red;
+  }
+}

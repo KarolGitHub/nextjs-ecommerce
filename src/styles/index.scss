@@ -1,12 +1,16 @@
+//globals
 @import './colors.scss';
-
+//layouts
 @import '../components/layouts/BasicLayout/BasicLayout.scss';
 
+//pages
 @import '../pages/index.scss';
 @import '../pages/cart.scss';
 @import '../pages/products.scss';
 @import '../pages/signin.scss';
-
+@import '../pages/register.scss';
+@import '../pages/product/product.scss';
+//components
 @import '../components/NavBar/Navbar.scss';
 @import '../components//UI/Spinner/Spinner.scss';
 @import '../components/UI/Toast/Toast.scss';

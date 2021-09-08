@@ -56,12 +56,14 @@ const Register: React.FC = () => {
   }, [auth]);
 
   return (
-    <BasicLayout className="signin">
+    <BasicLayout className="signin-page">
       <Head>
         <title>Register Page</title>
       </Head>
 
-      <form className="mx-auto my-4" onSubmit={formSubmitHandler}>
+      <form
+        className="credentials-form mx-auto my-4"
+        onSubmit={formSubmitHandler}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Name

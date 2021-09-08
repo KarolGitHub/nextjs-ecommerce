@@ -16,9 +16,20 @@ type Props = {
 
 const DetailProduct: React.FC<Props> = (props) => {
   const [product] = useState(props.product);
+  const [imgIndex, setImgIndex] = useState(0);
 
   const { state, dispatch } = useGlobalState();
   const { cart } = state;
+
+  const isImgActive = (index: number) => (imgIndex === index ? 'active' : '');
+  const imgStyles = [
+    { filter: 'sepia(30%)' },
+    { filter: 'saturate(60%)' },
+    { filter: 'contrast(200%)' },
+    { filter: 'grayscale(100%)' },
+    { filter: 'hue-rotate(185deg)' },
+  ];
+  const imgArray = [...new Array(5)].map(() => product.imageUrl);
 
   const router = useRouter();
 
@@ -33,7 +44,7 @@ const DetailProduct: React.FC<Props> = (props) => {
   };
 
   return (
-    <BasicLayout className="home">
+    <BasicLayout className="product-page">
       <Head>
         <title>{product.title}</title>
       </Head>
@@ -42,9 +53,23 @@ const DetailProduct: React.FC<Props> = (props) => {
         <div className="col-md-6">
           <img
             src={product.imageUrl}
-            alt={product.title}
+            alt={product.imageUrl}
             className="d-block img-thumbnail rounded mt-4 w-100"
+            style={{ height: '350px', ...imgStyles[imgIndex] }}
           />
+
+          <div className="row mx-0" style={{ cursor: 'pointer' }}>
+            {imgArray.map((imgUrl, index) => (
+              <img
+                key={index}
+                src={imgUrl}
+                alt={imgUrl}
+                className={`img-thumbnail rounded ${isImgActive(index)}`}
+                style={{ height: '80px', width: '20%', ...imgStyles[index] }}
+                onClick={() => setImgIndex(index)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="col-md-6 mt-3">

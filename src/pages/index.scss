@@ -1,35 +1,36 @@
-.home {
-  .content {
-    padding: 20px;
+.home-page {
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    justify-content: center;
+    margin: 20px 0;
+    background-color: inherit;
   }
-}
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  justify-content: center;
-  margin: 20px 0;
-  background-color: inherit;
-}
+  .products .card {
+    margin: 10px auto;
+  }
 
-.products .card {
-  margin: 10px auto;
-}
+  .products .card-img-top {
+    height: 250px !important;
+    width: 100% !important;
+  }
 
-.products .card-img-top {
-  height: 250px !important;
-  width: 100% !important;
-}
+  .products .card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-.products .card-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  .products .card-text {
+    height: 70px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
 
-.products .card-text {
-  height: 70px;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  .products-page .img-thumbnail.active {
+    border-color: orangered;
+    padding: 2px;
+  }
 }

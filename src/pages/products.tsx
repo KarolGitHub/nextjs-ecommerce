@@ -5,7 +5,7 @@ import { BasicLayout } from '../components';
 
 const Products: React.FC = () => {
   return (
-    <BasicLayout className="products">
+    <BasicLayout className="products-page">
       <Head>
         <title>Products Page</title>
       </Head>

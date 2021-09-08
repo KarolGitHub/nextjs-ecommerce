@@ -17,7 +17,7 @@ const Home: React.FC<Props> = (props) => {
   }, [props.products]);
 
   return (
-    <BasicLayout className="home">
+    <BasicLayout className="home-page">
       <Head>
         <title>Home Page</title>
       </Head>
