@@ -22,12 +22,12 @@ const Home: React.FC<Props> = (props) => {
         <title>Home Page</title>
       </Head>
       <div className="products">
-        {!products.length ? (
-          <h2>No Products</h2>
-        ) : (
+        {products.length > 0 ? (
           products.map((product) => (
             <ProductItem key={product._id} product={product} />
           ))
+        ) : (
+          <h2>No Products</h2>
         )}
       </div>
     </BasicLayout>
