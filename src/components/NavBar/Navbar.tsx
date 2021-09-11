@@ -101,10 +101,13 @@ const Navbar: React.FC = () => {
                   href="#">
                   <i
                     aria-hidden
-                    className="fas fa-shopping-cart position-relative">
-                    <span className="cart-count position-absolute">
-                      {cart.length}
-                    </span>
+                    className="fas fa-shopping-cart position-relative"
+                    id="cart-count">
+                    {cart.length > 0 && (
+                      <span className="cart-count position-absolute">
+                        {cart.length}
+                      </span>
+                    )}
                   </i>
                   Cart
                 </a>

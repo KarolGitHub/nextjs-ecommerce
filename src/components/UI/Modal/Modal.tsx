@@ -1,18 +1,16 @@
-import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { useGlobalState } from '../../../context/GlobalState';
 import { deleteItem } from '../../../store/Actions';
 
 const Modal: React.FC = () => {
   const { state, dispatch } = useGlobalState();
-  const { modal, auth } = state;
-
-  const router = useRouter();
+  const { modal } = state;
 
   const submitHandler = () => {
     dispatch(deleteItem('ADD_TO_CART', modal.data, modal.id));
     dispatch({ type: 'ADD_MODAL', payload: {} });
   };
+
   return (
     <div>
       <div

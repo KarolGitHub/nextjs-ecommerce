@@ -40,6 +40,13 @@ const DetailProduct: React.FC<Props> = (props) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, amount: amount }, cart));
+
+    const cartCount = document.getElementById('cart-count') as any;
+    cartCount.style.animation = 'scale 0.3s ease-in';
+    setTimeout(function () {
+      cartCount.style.animation = '';
+    }, 300);
+
     return router.push('/cart');
   };
 

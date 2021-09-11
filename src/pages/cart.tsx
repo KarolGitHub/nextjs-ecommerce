@@ -153,7 +153,7 @@ const Cart: React.FC = () => {
           <span>
             Once you have added items to your cart, you can check out from here.
           </span>
-          <Link href="/products">
+          <Link href="/">
             <a className="btn btn-info mt-3 w-50" style={{ maxWidth: '500px' }}>
               View products
             </a>

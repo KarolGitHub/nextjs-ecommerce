@@ -13,6 +13,16 @@ const ProductItem: React.FC<Props> = ({ product }) => {
   const { state, dispatch } = useGlobalState();
   const { cart } = state;
 
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product }, cart));
+
+    const cartCount = document.getElementById('cart-count') as any;
+    cartCount.style.animation = 'scale 0.3s ease-in';
+    setTimeout(function () {
+      cartCount.style.animation = '';
+    }, 300);
+  };
+
   return (
     <div className="card" style={{ width: '18rem' }}>
       <img
@@ -50,7 +60,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
           <button
             className="btn btn-success"
             style={{ marginLeft: '5px', flex: 1 }}
-            onClick={() => dispatch(addToCart(product, cart))}
+            onClick={addToCartHandler}
             disabled={!product.quantity}>
             Buy
           </button>
