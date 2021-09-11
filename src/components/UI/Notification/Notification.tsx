@@ -4,7 +4,7 @@ import { useGlobalState } from '../../../context/GlobalState';
 import Spinner from '../Spinner';
 import Toast from '../Toast';
 
-const Popup: React.FC = () => {
+const Notification: React.FC = () => {
   const { state, dispatch } = useGlobalState();
   const { notify } = state;
   const closeHandler = () => dispatch({ type: 'NOTIFY', payload: {} });
@@ -30,4 +30,4 @@ const Popup: React.FC = () => {
   );
 };
 
-export default Popup;
+export default Notification;
