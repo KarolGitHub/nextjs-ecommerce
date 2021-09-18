@@ -5,18 +5,20 @@ type Action = {
 
 type Dispatch = (action: Action) => void;
 
+interface UserData {
+  name: string;
+  email: string;
+  role: string;
+  avatar: string;
+  root: string;
+}
+
 type GlobalState = {
   notify: { error?: string; success?: string; loading?: boolean };
   cart: ProductData[];
-  auth?: {
+  auth: {
     token: string;
-    user: {
-      name: string;
-      email: string;
-      role: string;
-      avatar: string;
-      root: string;
-    };
+    user: Partial<UserData>;
   };
   modal: ModalPayload;
 };

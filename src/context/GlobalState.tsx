@@ -7,6 +7,7 @@ const initialState: GlobalState = {
   notify: {},
   modal: {},
   cart: [],
+  auth: { user: {}, token: '' },
 };
 
 const GlobalStateContext = createContext<

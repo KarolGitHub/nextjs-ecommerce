@@ -5,6 +5,8 @@ import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
 import valid from '../utils/valid';
 import { patchData } from '../utils/fetchData';
+import { AuthCheck } from '../components/AuthCheck/AuthCheck';
+import Spinner from '../components/UI/Spinner';
 
 const Profile: React.FC = () => {
   const initialSate = {
@@ -18,10 +20,8 @@ const Profile: React.FC = () => {
   const { avatar, name, password, confirmPassword } = data;
 
   const { state, dispatch } = useGlobalState();
+
   const { auth, notify } = state;
-  const { user } = auth || {
-    user: { name: '', email: '', role: '', avatar: '', root: '' },
-  };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,7 +31,7 @@ const Profile: React.FC = () => {
 
   const updatePassword = () => {
     dispatch({ type: 'NOTIFY', payload: { loading: true } });
-    patchData('user/resetPassword', password, auth?.token).then((res) => {
+    patchData('user/resetPassword', password, auth.token).then((res) => {
       if (res.err) {
         return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
       }
@@ -44,7 +44,7 @@ const Profile: React.FC = () => {
     if (password) {
       const errMsg = valid({
         name,
-        email: user.email,
+        email: auth.user.email + '',
         password,
         confirmPassword,
       });
@@ -58,85 +58,95 @@ const Profile: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      setData({ ...data, name: user.name });
+    if (auth.user) {
+      setData({ ...data, name: auth.user.name + '' });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth]);
+  }, [auth.user]);
 
   return (
     <BasicLayout className="profile-page">
       <Head>
         <title>Profile Page</title>
       </Head>
-      {user && (
-        <section className="row text-secondary my-3">
-          <div className="col-md-4">
-            <h3 className="text-center text-uppercase">User Profile</h3>
 
-            <div className="avatar">
-              <img src={user.avatar} alt="avatar" />
+      <AuthCheck user={auth.user}>
+        {Object.keys(auth.user).length > 0 ? (
+          <section className="row text-secondary my-3">
+            <div className="col-md-4">
+              <h3 className="text-center text-uppercase">User Profile</h3>
 
-              <span>
-                <i className="fas fa-camera" aria-hidden />
-                <p>Change</p>
-                <input type="file" name="file" id="file-up" accept="image/*" />
-              </span>
+              <div className="avatar">
+                <img src={auth.user.avatar} alt="avatar" />
+
+                <span>
+                  <i className="fas fa-camera" aria-hidden />
+                  <p>Change</p>
+                  <input
+                    type="file"
+                    name="file"
+                    id="file-up"
+                    accept="image/*"
+                  />
+                </span>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  className="form-control"
+                  placeholder="Name"
+                  onChange={inputChangeHandler}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  defaultValue={auth.user.email}
+                  className="form-control"
+                  placeholder="Email address"
+                  disabled
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  className="form-control"
+                  onChange={inputChangeHandler}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  className="form-control"
+                  onChange={inputChangeHandler}
+                />
+              </div>
+
+              <button
+                className="btn btn-info mt-3"
+                onClick={updateProfileHandler}
+                disabled={notify.loading}>
+                Update
+              </button>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                value={name}
-                className="form-control"
-                placeholder="Name"
-                onChange={inputChangeHandler}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                name="email"
-                defaultValue={user.email}
-                className="form-control"
-                placeholder="Email address"
-                disabled
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                className="form-control"
-                onChange={inputChangeHandler}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm New Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                className="form-control"
-                onChange={inputChangeHandler}
-              />
-            </div>
-
-            <button
-              className="btn btn-info mt-3"
-              onClick={updateProfileHandler}
-              disabled={notify.loading}>
-              Update
-            </button>
-          </div>
-        </section>
-      )}
+          </section>
+        ) : (
+          <Spinner />
+        )}
+      </AuthCheck>
     </BasicLayout>
   );
 };

@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   };
 
   const loginRoutes = () =>
-    auth && Object.keys(auth).length > 0 ? (
+    auth.token && auth.user > 0 ? (
       <li className="nav-item dropdown">
         <a
           className="nav-link dropdown-toggle d-flex flex-wrap gap-1 align-items-center"
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
           style={{ padding: '0.3rem 0.2rem' }}>
           <Image
             className="avatar"
-            src={auth.user.avatar}
+            src={auth.user.avatar + ''}
             alt={auth.user.avatar}
             width="30"
             height="30"></Image>

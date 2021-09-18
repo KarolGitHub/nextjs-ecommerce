@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import connectDB from '../../../utils/connectDB';
-import Users from '../../../models/userModel';
-import auth from '../../../middleware/auth';
 import resetPassword from './resetPassword';
 
 connectDB();

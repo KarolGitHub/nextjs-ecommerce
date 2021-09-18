@@ -49,7 +49,7 @@ const Register: React.FC = () => {
   };
 
   useEffect(() => {
-    if (auth && Object.keys(auth).length > 0) {
+    if (auth.user && auth.token) {
       router.push('/');
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
