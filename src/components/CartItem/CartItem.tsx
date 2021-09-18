@@ -76,7 +76,7 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
               }>
               <i
                 className="far fa-trash-alt text-danger"
-                aria-hidden="true"
+                aria-hidden
                 style={{ fontSize: '18px' }}
                 data-bs-toggle="modal"
                 data-bs-target="#Modal"

@@ -42,9 +42,11 @@ const Navbar: React.FC = () => {
         </a>
 
         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a className="dropdown-item" href="#">
-            Profile
-          </a>
+          <Link href="/profile">
+            <a className="dropdown-item" href="#">
+              Profile
+            </a>
+          </Link>
 
           <div className="dropdown-divider"></div>
 

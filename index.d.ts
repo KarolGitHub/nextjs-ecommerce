@@ -21,6 +21,27 @@ type GlobalState = {
   modal: ModalPayload;
 };
 
+type ProductData = {
+  _id: string;
+  title: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  category: string;
+  currency: 'EUR' | 'GBP' | 'USD' | 'PLN';
+  status: 'Available' | 'Unavailable';
+  sold: number;
+  quantity: number;
+  amount: number;
+};
+interface ModalInterface {
+  type: 'ADD_TO_CART' | 'ADD_MODAL';
+  title: string;
+  id: string;
+  data: ProductData[];
+}
+type ModalPayload = Partial<ModalInterface>;
+
 type RegisterPayload = {
   name: string;
   email: string;
@@ -64,24 +85,3 @@ interface AuthPayloadInterface {
   root: string;
 }
 type AuthPayload = Partial<AuthPayloadInterface>;
-
-type ProductData = {
-  _id: string;
-  title: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-  category: string;
-  currency: 'EUR' | 'GBP' | 'USD' | 'PLN';
-  status: 'Available' | 'Unavailable';
-  sold: number;
-  quantity: number;
-  amount: number;
-};
-interface ModalInterface {
-  type: 'ADD_TO_CART' | 'ADD_MODAL';
-  title: string;
-  id: string;
-  data: ProductData[];
-}
-type ModalPayload = Partial<ModalInterface>;

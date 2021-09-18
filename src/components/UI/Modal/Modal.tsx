@@ -18,7 +18,7 @@ const Modal: React.FC = () => {
         id="Modal"
         tabIndex={-1}
         aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">

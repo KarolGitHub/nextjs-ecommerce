@@ -54,8 +54,7 @@ const Cart: React.FC = () => {
 
         dispatch({ type: 'ADD_TO_CART', payload: newCartArray });
       })();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const paymentHandler = () => {

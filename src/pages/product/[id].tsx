@@ -35,7 +35,7 @@ const DetailProduct: React.FC<Props> = (props) => {
 
   const [amount, setAmount] = useState(1);
 
-  const changeAmountHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const amountChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAmount(+e.target.value);
 
   const addToCartHandler = () => {
@@ -116,7 +116,7 @@ const DetailProduct: React.FC<Props> = (props) => {
               className="form-control text-center"
               style={{ width: '100px' }}
               value={amount}
-              onChange={changeAmountHandler}
+              onChange={amountChangeHandler}
             />
 
             <button
