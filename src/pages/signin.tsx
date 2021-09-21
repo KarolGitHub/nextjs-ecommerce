@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
   };
 
   useEffect(() => {
-    if (auth.user && auth.token) {
+    if (auth.token && Object.keys(auth.user).length) {
       router.push('/');
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);

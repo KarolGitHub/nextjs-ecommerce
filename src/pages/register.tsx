@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
@@ -19,10 +18,7 @@ const Register: React.FC = () => {
   const [userData, setUserData] = useState(initialState);
   const { name, email, password, confirmPassword } = userData;
 
-  const router = useRouter();
-
-  const { state, dispatch } = useGlobalState();
-  const { auth } = state;
+  const { dispatch } = useGlobalState();
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,12 +43,6 @@ const Register: React.FC = () => {
 
     return dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
   };
-
-  useEffect(() => {
-    if (auth.user && auth.token) {
-      router.push('/');
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth]);
 
   return (
     <BasicLayout className="signin-page">

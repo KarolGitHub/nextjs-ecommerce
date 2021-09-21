@@ -5,7 +5,7 @@
     overflow: hidden;
     position: relative;
     margin: 15px auto;
-    border: 1px solid #ddd;
+    border: 1px solid $border-light;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -20,19 +20,23 @@
 
   .avatar span {
     position: absolute;
-    bottom: -100%;
-    left: 0;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
     width: 100%;
-    height: 50%;
-    background: #fff8;
+    height: 100%;
     text-align: center;
-    font-weight: 400;
-    color: rgb(255, 140, 45);
-    transition: 0.3 ease-in-out;
+    font-weight: 600;
+    color: $red;
+    opacity: 0;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    transition: opacity 0.3s ease-in-out;
   }
 
   .avatar:hover span {
-    bottom: -15%;
+    opacity: 1;
   }
 
   #file-up {

@@ -50,7 +50,7 @@ export const putData = async (
 
 export const patchData = async (
   url: string,
-  post: string,
+  post: string | {},
   token = ''
 ): Promise<any> => {
   const res = await fetch(`${baseUrl}/api/${url}`, {

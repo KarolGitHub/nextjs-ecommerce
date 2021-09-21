@@ -10,7 +10,7 @@ import Spinner from '../components/UI/Spinner';
 
 const Profile: React.FC = () => {
   const initialSate = {
-    avatar: '',
+    avatar: '' as any,
     name: '',
     password: '',
     confirmPassword: '',
@@ -27,6 +27,22 @@ const Profile: React.FC = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
     dispatch({ type: 'NOTIFY', payload: {} });
+  };
+
+  const avatarChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'File does not exist.' },
+      });
+    } else if (file.size > 1024 * 1024) {
+      return dispatch({
+        type: 'NOTIFY',
+        payload: { error: 'The largest image size is 1MB.' },
+      });
+    }
+    setData({ ...data, avatar: file });
   };
 
   const updatePassword = () => {
@@ -52,16 +68,51 @@ const Profile: React.FC = () => {
       if (errMsg) {
         return dispatch({ type: 'NOTIFY', payload: { error: errMsg } });
       }
-
       updatePassword();
+    }
+    if (name !== auth.user.name || avatar) {
+      updateNameOrAvatar();
     }
   };
 
+  const updateNameOrAvatar = () => {
+    dispatch({ type: 'NOTIFY', payload: { loading: true } });
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(avatar);
+
+    reader.onload = async function () {
+      patchData(
+        'user',
+        {
+          name,
+          avatar: avatar ? reader.result : auth.user.avatar,
+        },
+        auth.token
+      ).then((res) => {
+        if (res.err) {
+          return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+        }
+
+        dispatch({
+          type: 'AUTH',
+          payload: {
+            token: auth.token,
+            user: res.user,
+          },
+        });
+
+        return dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
+      });
+    };
+  };
+
   useEffect(() => {
-    if (auth.user) {
+    if (auth.token && Object.keys(auth.user).length) {
       setData({ ...data, name: auth.user.name + '' });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.user]);
+  }, [auth]);
 
   return (
     <BasicLayout className="profile-page">
@@ -70,22 +121,26 @@ const Profile: React.FC = () => {
       </Head>
 
       <AuthCheck user={auth.user}>
-        {Object.keys(auth.user).length > 0 ? (
+        {Object.keys(auth.user).length ? (
           <section className="row text-secondary my-3">
             <div className="col-md-4">
               <h3 className="text-center text-uppercase">User Profile</h3>
 
               <div className="avatar">
-                <img src={auth.user.avatar} alt="avatar" />
+                <img
+                  src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
+                  alt="avatar"
+                />
 
                 <span>
                   <i className="fas fa-camera" aria-hidden />
-                  <p>Change</p>
+                  <p>Change - max size is 1024x512px / 1MB</p>
                   <input
                     type="file"
                     name="file"
                     id="file-up"
                     accept="image/*"
+                    onChange={avatarChangeHandler}
                   />
                 </span>
               </div>
@@ -94,6 +149,7 @@ const Profile: React.FC = () => {
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
+                  name="name"
                   value={name}
                   className="form-control"
                   placeholder="Name"

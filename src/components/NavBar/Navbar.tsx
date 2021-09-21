@@ -16,13 +16,13 @@ const Navbar: React.FC = () => {
   const handleLogout = () => {
     Cookie.remove('refreshToken', { path: 'api/auth/accessToken' });
     localStorage.removeItem('firstLogin');
-    dispatch({ type: 'AUTH', payload: {} });
+    dispatch({ type: 'AUTH', payload: { token: '', user: {} } });
     dispatch({ type: 'NOTIFY', payload: { success: 'Logout Successful' } });
     return router.push('/');
   };
 
   const loginRoutes = () =>
-    auth.token && auth.user > 0 ? (
+    auth.token && Object.keys(auth.user).length ? (
       <li className="nav-item dropdown">
         <a
           className="nav-link dropdown-toggle d-flex flex-wrap gap-1 align-items-center"

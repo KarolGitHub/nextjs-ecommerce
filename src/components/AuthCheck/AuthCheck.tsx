@@ -9,7 +9,11 @@ type Props = {
 export const AuthCheck: React.FC<Props> = ({ children, user }) => {
   const router = useRouter();
 
-  if (typeof window !== 'undefined' && !Object.keys(user).length) {
+  if (
+    typeof window !== 'undefined' &&
+    !Object.keys(user).length &&
+    !localStorage.getItem('firstLogin')
+  ) {
     router.push('/signin');
   }
 
