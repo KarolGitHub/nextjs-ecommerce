@@ -1,5 +1,5 @@
 type Action = {
-  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART' | 'ADD_MODAL';
+  type: 'NOTIFY' | 'AUTH' | 'ADD_TO_CART' | 'ADD_MODAL' | 'ADD_ORDERS';
   payload: any;
 };
 
@@ -21,6 +21,7 @@ type GlobalState = {
     user: Partial<UserData>;
   };
   modal: ModalPayload;
+  orders: OrderData[];
 };
 
 type ProductData = {
@@ -35,6 +36,23 @@ type ProductData = {
   sold: number;
   quantity: number;
   amount: number;
+};
+
+type OrderData = {
+  _id: string;
+  user: Pick<UserData, 'name' | 'email'>;
+  address: string;
+  phoneNumber: string;
+  cart: ProductData[];
+  totalPrice: number;
+  createdAt: string;
+  delivered: boolean;
+  paid: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  dateOfPayment: Date;
+  paymentId: string;
+  method: 'Paypal';
 };
 interface ModalInterface {
   type: 'ADD_TO_CART' | 'ADD_MODAL';
@@ -87,3 +105,11 @@ interface AuthPayloadInterface {
   root: string;
 }
 type AuthPayload = Partial<AuthPayloadInterface>;
+interface OrderPayloadInterface {
+  err: string;
+  msg: string;
+  order: OrderData;
+  cart: ProductData[];
+  totalPrice: number;
+}
+type OrderPayload = Partial<OrderPayloadInterface>;

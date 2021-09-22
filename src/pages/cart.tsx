@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { BasicLayout, CartItem, PaypalButton } from '../components';
+import { BasicLayout, CartItem } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import { getData } from '../utils/fetchData';
+import { getData, postData } from '../utils/fetchData';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useGlobalState();
-  const { auth, cart } = state;
+  const { auth, cart, orders } = state;
 
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -16,7 +17,9 @@ const Cart: React.FC = () => {
     address: string;
     phoneNumber: string;
   }>({ address: '', phoneNumber: '' });
-  const [payment, setPayment] = useState(false);
+
+  const [callback, setCallback] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     (() => {
@@ -37,7 +40,7 @@ const Cart: React.FC = () => {
       (async () => {
         for (const item of localStorageCart) {
           const result = await getData(`product/${item._id}`);
-          const { _id, title, imageUrl, price, quantity, sold } =
+          const { _id, title, imageUrl, price, quantity, sold, currency } =
             result.product;
           if (quantity) {
             newCartArray.push({
@@ -47,6 +50,7 @@ const Cart: React.FC = () => {
               price,
               quantity,
               sold,
+              currency,
               amount: item.amount > quantity ? quantity : item.amount,
             });
           }
@@ -55,16 +59,53 @@ const Cart: React.FC = () => {
         dispatch({ type: 'ADD_TO_CART', payload: newCartArray });
       })();
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [callback]);
 
-  const paymentHandler = () => {
+  const paymentHandler = async () => {
     if (!shippingData.address || !shippingData.phoneNumber) {
       return dispatch({
         type: 'NOTIFY',
         payload: { error: 'Please add your address and phone number' },
       });
     }
-    setPayment(true);
+
+    const newCart = [];
+    for (const item of cart) {
+      const res = await getData(`product/${item._id}`);
+      if (res.product.quantity - item.amount >= 0) {
+        newCart.push(item);
+      }
+    }
+
+    if (newCart.length < cart.length) {
+      setCallback((prevState) => !prevState);
+      return dispatch({
+        type: 'NOTIFY',
+        payload: {
+          error: 'The product is out of stock or the quantity is insufficient',
+        },
+      });
+    }
+
+    dispatch({ type: 'NOTIFY', payload: { loading: true } });
+
+    postData('order', { ...shippingData, cart, totalPrice }, auth.token).then(
+      (res) => {
+        if (res.err) {
+          return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+        }
+
+        dispatch({ type: 'ADD_TO_CART', payload: [] });
+
+        const newOrder = {
+          ...res.newOrder,
+          user: auth.user,
+        };
+        dispatch({ type: 'ADD_ORDERS', payload: [...orders, newOrder] });
+        dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
+        router.push(`/order/${res.newOrder._id}`);
+      }
+    );
   };
 
   return (
@@ -112,7 +153,7 @@ const Cart: React.FC = () => {
 
               <label htmlFor="phone-number">Phone number</label>
               <input
-                type="text"
+                type="number"
                 name="phone-number"
                 id="phone-number"
                 className="form-control mb-2"
@@ -127,18 +168,15 @@ const Cart: React.FC = () => {
             </form>
 
             <h3>
-              Total: <span className="text-danger">${totalPrice}</span>
+              Total:{' '}
+              <span className="text-danger">€{totalPrice.toFixed(2)}</span>
             </h3>
 
-            {payment ? (
-              <PaypalButton order={{ totalPrice, ...shippingData, cart }} />
-            ) : (
-              <Link href={auth?.user ? '#!' : '/signin'}>
-                <a className="btn btn-dark my-2" onClick={paymentHandler}>
-                  Proceed with payment
-                </a>
-              </Link>
-            )}
+            <Link href={auth?.user ? '#!' : '/signin'}>
+              <a className="btn btn-dark my-2" onClick={paymentHandler}>
+                Proceed with payment
+              </a>
+            </Link>
           </div>
         </div>
       ) : (

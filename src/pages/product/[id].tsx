@@ -14,7 +14,7 @@ type Props = {
   product: ProductData;
 };
 
-const DetailProduct: React.FC<Props> = (props) => {
+const Product: React.FC<Props> = (props) => {
   const [product] = useState(props.product);
   const [imgIndex, setImgIndex] = useState(0);
 
@@ -151,4 +151,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default DetailProduct;
+export default Product;

@@ -93,7 +93,7 @@ const PaypalUrlScript = (
   <script
     key="PaypalUrlScript"
     defer
-    src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`}></script>
+    src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&currency=EUR`}></script>
 );
 
 const mergedLinks = [

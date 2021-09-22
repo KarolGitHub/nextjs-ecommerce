@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
@@ -21,7 +22,7 @@ const Profile: React.FC = () => {
 
   const { state, dispatch } = useGlobalState();
 
-  const { auth, notify } = state;
+  const { auth, notify, orders } = state;
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,12 +35,12 @@ const Profile: React.FC = () => {
     if (!file) {
       return dispatch({
         type: 'NOTIFY',
-        payload: { error: 'File does not exist.' },
+        payload: { error: 'File does not exist' },
       });
     } else if (file.size > 1024 * 1024) {
       return dispatch({
         type: 'NOTIFY',
-        payload: { error: 'The largest image size is 1MB.' },
+        payload: { error: 'The largest image size is 1MB' },
       });
     }
     setData({ ...data, avatar: file });
@@ -197,6 +198,60 @@ const Profile: React.FC = () => {
                 disabled={notify.loading}>
                 Update
               </button>
+            </div>
+
+            <div className="col-md-8">
+              <h3 className="text-uppercase">Orders</h3>
+
+              <div className="my-3 table-responsive">
+                <table
+                  className="table-bordered table-hover w-100 text-uppercase"
+                  style={{ minWidth: '600px', cursor: 'pointer' }}>
+                  <thead className="bg-light fw-bold">
+                    <tr>
+                      <td className="p-2">id</td>
+                      <td className="p-2">date</td>
+                      <td className="p-2">total</td>
+                      <td className="p-2">delivered</td>
+                      <td className="p-2">paid</td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order._id}>
+                        <td className="p-2">
+                          <Link href={`/order/${order._id}`}>
+                            <a>{order._id}</a>
+                          </Link>
+                        </td>
+
+                        <td className="p-2">
+                          {new Date(order.createdAt).toLocaleDateString()}
+                        </td>
+
+                        <td className="p-2">€{order.totalPrice}</td>
+
+                        <td className="p-2">
+                          {order.delivered ? (
+                            <i className="fas fa-check text-success"></i>
+                          ) : (
+                            <i className="fas fa-times text-danger"></i>
+                          )}
+                        </td>
+
+                        <td className="p-2">
+                          {order.paid ? (
+                            <i className="fas fa-check text-success"></i>
+                          ) : (
+                            <i className="fas fa-times text-danger"></i>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
         ) : (

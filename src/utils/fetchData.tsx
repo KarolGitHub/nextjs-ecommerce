@@ -14,7 +14,7 @@ export const getData = async (url: string, token = ''): Promise<any> => {
 
 export const postData = async (
   url: string,
-  post: RegisterPayload | LoginPayload,
+  post: RegisterPayload | LoginPayload | OrderPayload,
   token = ''
 ): Promise<any> => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
@@ -50,7 +50,7 @@ export const putData = async (
 
 export const patchData = async (
   url: string,
-  post: string | {},
+  post: string | {} | null,
   token = ''
 ): Promise<any> => {
   const res = await fetch(`${baseUrl}/api/${url}`, {

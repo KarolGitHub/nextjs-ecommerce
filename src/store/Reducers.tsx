@@ -20,6 +20,11 @@ const reducers = (state: GlobalState, action: Action): GlobalState => {
         ...state,
         modal: action.payload,
       };
+    case 'ADD_ORDERS':
+      return {
+        ...state,
+        orders: action.payload,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

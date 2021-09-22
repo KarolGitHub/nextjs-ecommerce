@@ -10,12 +10,12 @@ const auth = async (
   const accessToken = process.env.ACCESS_TOKEN_SECRET || '';
 
   if (!token) {
-    return res.status(400).json({ err: 'Invalid Authentication.' });
+    return res.status(400).json({ err: 'Invalid Authentication' });
   }
 
   const decoded = jwt.verify(token, accessToken);
   if (!decoded) {
-    return res.status(400).json({ err: 'Invalid Authentication.' });
+    return res.status(400).json({ err: 'Invalid Authentication' });
   }
 
   const user = await Users.findOne({ _id: (decoded as any).id });

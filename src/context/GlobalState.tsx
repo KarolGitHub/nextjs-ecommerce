@@ -8,6 +8,7 @@ const initialState: GlobalState = {
   modal: {},
   cart: [],
   auth: { user: {}, token: '' },
+  orders: [],
 };
 
 const GlobalStateContext = createContext<
@@ -18,7 +19,7 @@ function GlobalStateProvider({
   children,
 }: React.ReactElement | React.ReactElement[] | any): JSX.Element {
   const [state, dispatch] = useReducer(reducers, initialState);
-  const { cart } = state;
+  const { auth, cart } = state;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin');
@@ -52,6 +53,18 @@ function GlobalStateProvider({
   useEffect(() => {
     localStorage.setItem('nextjs-ecommerce-cart', JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    if (auth.token) {
+      getData('order', auth.token).then((res) => {
+        if (res.err) {
+          return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
+        }
+
+        dispatch({ type: 'ADD_ORDERS', payload: res.orders });
+      });
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.token]);
 
   return (
     <GlobalStateContext.Provider value={{ state, dispatch }}>

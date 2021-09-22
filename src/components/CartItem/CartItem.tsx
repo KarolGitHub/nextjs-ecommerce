@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { decreaseItemAmount, increaseItemAmount } from '../../store/Actions';
+import { currencySymbol } from '../../utils/sharedVariables';
 
 type Props = {
   item: ProductData;
@@ -31,8 +32,9 @@ const CartItem: React.FC<Props> = ({ item, dispatch, cart }) => {
                   <a>{item.title}</a>
                 </Link>
               </h5>
-
-              <h6 className="text-danger">${item.amount * item.price}</h6>
+              <h6 className="text-danger">{`${currencySymbol[item.currency]}${(
+                item.amount * item.price
+              ).toFixed(2)}`}</h6>
               {item.quantity > 0 ? (
                 <p className="mb-1 text-danger">In Stock: {item.quantity}</p>
               ) : (
