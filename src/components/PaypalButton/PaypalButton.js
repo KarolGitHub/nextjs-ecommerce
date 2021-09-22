@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useGlobalState } from '../../context/GlobalState';
-import { postData } from '../../utils/fetchData';
+import { patchData } from '../../utils/fetchData';
+import { updateItem } from '../../store/Actions';
 
 const PaypalButton = ({ order }) => {
   const refPaypalBtn = useRef();
 
   const { state, dispatch } = useGlobalState();
-  const { auth } = state;
+  const { auth, orders } = state;
 
   useEffect(() => {
     paypal
@@ -26,15 +27,28 @@ const PaypalButton = ({ order }) => {
           dispatch({ type: 'NOTIFY', payload: { loading: true } });
 
           return actions.order.capture().then(function (details) {
-            postData(`order`, { ...order }, auth.token).then((res) => {
-              if (res.err) {
+            patchData(
+              `order/payment/${order._id}`,
+              {
+                paymentId: details.payer.payer_id,
+              },
+              auth.token
+            ).then((res) => {
+              if (res.err)
                 return dispatch({
                   type: 'NOTIFY',
                   payload: { error: res.err },
                 });
-              }
 
-              dispatch({ type: 'ADD_TO_CART', payload: [] });
+              dispatch(
+                updateItem('ADD_ORDERS', orders, order._id, {
+                  ...order,
+                  paid: true,
+                  dateOfPayment: details.create_time,
+                  paymentId: details.payer.payer_id,
+                  method: 'Paypal',
+                })
+              );
 
               return dispatch({
                 type: 'NOTIFY',

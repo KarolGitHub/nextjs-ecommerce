@@ -54,3 +54,13 @@ export const deleteItem = (
   const newItems = items?.filter((item) => item._id !== id);
   return { type, payload: newItems };
 };
+
+export const updateItem = (
+  type: Action['type'],
+  data: OrderData[],
+  id: string,
+  post: OrderData
+): Action => {
+  const newData = data.map((item) => (item._id === id ? post : item));
+  return { type, payload: newData };
+};
