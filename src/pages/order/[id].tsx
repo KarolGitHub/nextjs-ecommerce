@@ -6,7 +6,7 @@ import { useGlobalState } from '../../context/GlobalState';
 import { BasicLayout, OrderDetails } from '../../components';
 
 const Order: React.FC = () => {
-  const { state } = useGlobalState();
+  const { state, dispatch } = useGlobalState();
   const { orders, auth } = state;
 
   const router = useRouter();
@@ -32,7 +32,7 @@ const Order: React.FC = () => {
         <title>Detail Orders</title>
       </Head>
 
-      <OrderDetails data={data} state={state} />
+      <OrderDetails data={data} state={state} dispatch={dispatch} />
     </BasicLayout>
   );
 };

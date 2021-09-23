@@ -25,10 +25,15 @@ const getOrders = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   try {
     const result = await auth(req, res);
 
-    const orders = await Orders.find({ user: result.id }).populate(
-      'user',
-      '-password'
-    );
+    let orders;
+    if (result.role !== 'admin') {
+      orders = await Orders.find({ user: result.id }).populate(
+        'user',
+        '-password'
+      );
+    } else {
+      orders = await Orders.find().populate('user', '-password');
+    }
 
     res.json({ orders });
   } catch (err) {
