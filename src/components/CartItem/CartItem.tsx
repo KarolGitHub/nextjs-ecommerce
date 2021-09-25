@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { decreaseItemAmount, increaseItemAmount } from '../../store/Actions';
-import { currencySymbol } from '../../utils/sharedVariables';
+import { currencySymbol } from '../../utils/shared';
 
 type Props = {
   item: ProductData;

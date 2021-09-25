@@ -6,7 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 
 import { getData } from '../../utils/fetchData';
 import { BasicLayout } from '../../components';
-import { currencySymbol } from '../../utils/sharedVariables';
+import { currencySymbol } from '../../utils/shared';
 import { useGlobalState } from '../../context/GlobalState';
 import { addToCart } from '../../store/Actions';
 

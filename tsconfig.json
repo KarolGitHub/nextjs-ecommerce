@@ -20,6 +20,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/PaypalButton/paypalButton.js"
+    "src/components/PaypalButton/paypalButton.js",
+    "src/utils/shared.js",
+    "src/pages/api/product/index.js"
   ]
 }

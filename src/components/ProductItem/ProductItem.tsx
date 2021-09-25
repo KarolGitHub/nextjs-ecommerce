@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { currencySymbol } from '../../utils/sharedVariables';
+import { currencySymbol } from '../../utils/shared';
 import { useGlobalState } from '../../context/GlobalState';
 import { addToCart } from '../../store/Actions';
 

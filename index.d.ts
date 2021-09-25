@@ -45,7 +45,6 @@ type OrderData = {
   phoneNumber: string;
   cart: ProductData[];
   totalPrice: number;
-  createdAt: string;
   delivered: boolean;
   paid: boolean;
   createdAt: Date;
@@ -53,6 +52,11 @@ type OrderData = {
   dateOfPayment: Date;
   paymentId: string;
   method: 'Paypal';
+};
+
+type Category = {
+  id: string;
+  title: string;
 };
 interface ModalInterface {
   type: 'ADD_TO_CART' | 'ADD_MODAL';
