@@ -22,6 +22,10 @@
     "**/*.tsx",
     "src/components/PaypalButton/paypalButton.js",
     "src/utils/shared.js",
-    "src/pages/api/product/index.js"
+    "src/pages/api/product/index.js",
+    "src/hooks/index.js",
+    "src/hooks/useWindowSize.js",
+    "src/utils/generateToken.js",
+    "src/utils/filterSearch.js"
   ]
 }

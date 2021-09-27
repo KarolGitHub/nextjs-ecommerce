@@ -5,9 +5,10 @@ import filterSearch from '../../utils/filterSearch';
 
 type Props = {
   categories: Category[];
+  width?: number;
 };
 
-const Filter: React.FC<Props> = ({ categories }) => {
+const Filter: React.FC<Props> = ({ categories, width }) => {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('');
   const [category, setCategory] = useState('');
@@ -16,23 +17,27 @@ const Filter: React.FC<Props> = ({ categories }) => {
 
   const categoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
-    filterSearch({ router, category: e.target.value });
+    filterSearch({ router, width, category: e.target.value });
   };
 
   const sortHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSort(e.target.value);
-    filterSearch({ router, sort: e.target.value });
+    filterSearch({ router, width, sort: e.target.value });
   };
 
   useEffect(
     () => {
-      filterSearch({ router, search: search ? search.toLowerCase() : 'all' });
+      filterSearch({
+        router,
+        width,
+        search: search ? search.toLowerCase() : 'all',
+      });
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [search]
   );
 
   return (
-    <div className="input-group">
+    <div className="input-group gap-1 flex-nowrap">
       <div className="col-md-2 px-0 mt-2">
         <select
           className="form-select text-capitalize"

@@ -8,6 +8,7 @@ import { getData } from '../utils/fetchData';
 import { uniqueKeyValues } from '../utils/shared';
 import filterSearch from '../utils/filterSearch';
 import { useGlobalState } from '../context/GlobalState';
+import { useWindowSize } from '../hooks';
 
 type Props = {
   products: ProductData[];
@@ -22,6 +23,8 @@ const Home: React.FC<Props> = (props) => {
 
   const [page, setPage] = useState(1);
   const router = useRouter();
+
+  const { width } = useWindowSize();
 
   useEffect(() => {
     getData('product').then((res) => {
@@ -43,13 +46,18 @@ const Home: React.FC<Props> = (props) => {
   }, [props.products]);
 
   useEffect(() => {
-    if (Object.keys(router.query).length === 0) setPage(1);
+    if (!Object.keys(router.query).length) {
+      setPage(1);
+    }
   }, [router.query]);
 
-  const handleLoadmore = () => {
-    setPage(page + 1);
-    filterSearch({ router, page: page + 1 });
+  const handleLoadmore = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setPage((prevState) => ++prevState);
+    filterSearch({ router, width, page: page + 1 });
   };
+
+  useEffect(() => console.log(width));
 
   return (
     <BasicLayout className="home-page">
@@ -57,40 +65,37 @@ const Home: React.FC<Props> = (props) => {
         <title>Home Page</title>
       </Head>
 
-      <Filter categories={categories} />
+      <Filter categories={categories} width={width} />
 
       <div className="products">
-        {products.length > 0 ? (
+        {products.length ? (
           products.map((product) => (
             <ProductItem key={product._id} product={product} />
           ))
         ) : (
-          <h2>No Products</h2>
+          <h2 className="text-center">No Products</h2>
         )}
       </div>
 
-      {props.result < page * 6 ? (
-        ''
-      ) : (
+      {props.result ? (
         <button
           className="btn btn-outline-info d-block mx-auto mb-4"
           onClick={handleLoadmore}>
           Load more
         </button>
+      ) : (
+        ''
       )}
     </BasicLayout>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const page = query.page || 1;
-  const category = query.category || 'all';
-  const sort = query.sort || '';
-  const search = query.search || 'all';
-
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { page = 1, category = 'all', sort = '', search = 'all', limit = 8 },
+}) => {
   const res = await getData(
     `product?limit=${
-      +page * 6
+      +page * +limit
     }&category=${category}&sort=${sort}&title=${search}`
   );
 
