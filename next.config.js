@@ -9,12 +9,4 @@ module.exports = {
   images: {
     domains: ['openui5.hana.ondemand.com'],
   },
-  env: {
-    BASE_URL: 'YOUR_URL',
-    MONGODB_URL:
-      'YOUR_MONGODB_URL',
-    ACCESS_TOKEN_SECRET: 'YOUR_ACCESS_TOKEN',
-    REFRESH_TOKEN_SECRET:
-      'YOUR_REFRESH_TOKEN',
-  },
 };
