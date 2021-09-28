@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import { BasicLayout, Filter, ProductItem } from '../components';
 import { getData } from '../utils/fetchData';
@@ -57,8 +58,6 @@ const Home: React.FC<Props> = (props) => {
     filterSearch({ router, width, page: page + 1 });
   };
 
-  useEffect(() => console.log(width));
-
   return (
     <BasicLayout className="home-page">
       <Head>
@@ -67,15 +66,23 @@ const Home: React.FC<Props> = (props) => {
 
       <Filter categories={categories} width={width} />
 
-      <div className="products">
-        {products.length ? (
-          products.map((product) => (
+      {products.length ? (
+        <div className="products">
+          {products.map((product) => (
             <ProductItem key={product._id} product={product} />
-          ))
-        ) : (
-          <h2 className="text-center">No Products</h2>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="no-products">
+          <Image
+            src="/no-products.svg"
+            alt="No Products found"
+            width="100"
+            height="100"
+          />
+          <h2 className="text-center">No products found</h2>
+        </div>
+      )}
 
       {props.result ? (
         <button
