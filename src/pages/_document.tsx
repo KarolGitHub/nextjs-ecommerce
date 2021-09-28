@@ -57,11 +57,10 @@ const TwitterCardMetaLink = (
 const bootstrapCSS = (
   <link
     key="bootstrapCSS"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
     rel="stylesheet"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-    crossOrigin="anonymous"
-  />
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+    crossOrigin="anonymous"></link>
 );
 
 const PopperJS = (
@@ -76,9 +75,9 @@ const PopperJS = (
 const bootstrapJS = (
   <script
     key="bootstrapJS"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
     defer
-    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+    integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
     crossOrigin="anonymous"></script>
 );
 
@@ -87,6 +86,7 @@ const fontAwesomeScript = (
     key="fontAwesomeScript"
     defer
     src="https://kit.fontawesome.com/a076d05399.js"
+    crossOrigin="anonymous"
   />
 );
 const PaypalUrlScript = (

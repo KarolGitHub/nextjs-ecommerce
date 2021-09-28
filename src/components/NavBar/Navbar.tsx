@@ -41,7 +41,9 @@ const Navbar: React.FC = () => {
           {auth.user.name}
         </a>
 
-        <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <ul
+          className="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink">
           <Link href="/profile">
             <a className="dropdown-item" href="#">
               Profile
