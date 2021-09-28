@@ -20,10 +20,14 @@ const filterSearch = ({ router, width, ...params }) => {
 
   const query = { ...router.query, ...params, limit };
 
-  router.push({
-    pathname: path,
-    query: query,
-  });
+  router.push(
+    {
+      pathname: path,
+      query: query,
+    },
+    undefined,
+    { scroll: false }
+  );
 };
 
 export default filterSearch;
