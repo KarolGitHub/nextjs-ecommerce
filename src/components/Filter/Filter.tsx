@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import filterSearch from '../../utils/filterSearch';
@@ -9,7 +9,9 @@ type Props = {
 };
 
 const Filter: React.FC<Props> = ({ categories, width }) => {
-  const [search, setSearch] = useState('');
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const throttling = useRef(false);
+
   const [sort, setSort] = useState('');
   const [category, setCategory] = useState('');
 
@@ -25,16 +27,20 @@ const Filter: React.FC<Props> = ({ categories, width }) => {
     filterSearch({ router, width, sort: e.target.value });
   };
 
-  useEffect(
-    () => {
+  const throttleSearchHandler = () => {
+    if (!throttling.current && searchInputRef.current?.value.trim())
+      throttling.current = true;
+    setTimeout(() => {
+      throttling.current = false;
       filterSearch({
         router,
         width,
-        search: search ? search.toLowerCase() : 'all',
+        search: searchInputRef.current
+          ? searchInputRef.current.value.toLowerCase()
+          : 'all',
       });
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [search]
-  );
+    }, 1000);
+  };
 
   return (
     <div className="input-group gap-1 flex-nowrap">
@@ -58,8 +64,8 @@ const Filter: React.FC<Props> = ({ categories, width }) => {
           type="text"
           className="form-control"
           list="title_product"
-          value={search.toLowerCase()}
-          onChange={(e) => setSearch(e.target.value)}
+          ref={(el) => (searchInputRef.current = el)}
+          onChange={throttleSearchHandler}
         />
       </form>
 
