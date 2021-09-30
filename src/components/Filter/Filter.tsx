@@ -5,10 +5,10 @@ import filterSearch from '../../utils/filterSearch';
 
 type Props = {
   categories: Category[];
-  width?: number;
+  limit?: number;
 };
 
-const Filter: React.FC<Props> = ({ categories, width }) => {
+const Filter: React.FC<Props> = ({ categories, limit }) => {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const throttling = useRef(false);
 
@@ -19,12 +19,12 @@ const Filter: React.FC<Props> = ({ categories, width }) => {
 
   const categoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
-    filterSearch({ router, width, category: e.target.value });
+    filterSearch({ router, limit, category: e.target.value });
   };
 
   const sortHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSort(e.target.value);
-    filterSearch({ router, width, sort: e.target.value });
+    filterSearch({ router, limit, sort: e.target.value });
   };
 
   const throttleSearchHandler = () => {
@@ -34,7 +34,7 @@ const Filter: React.FC<Props> = ({ categories, width }) => {
       throttling.current = false;
       filterSearch({
         router,
-        width,
+        limit,
         search: searchInputRef.current
           ? searchInputRef.current.value.toLowerCase()
           : 'all',

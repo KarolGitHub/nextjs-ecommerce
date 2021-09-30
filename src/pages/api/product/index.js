@@ -6,7 +6,7 @@ connectDB();
 const product = async (req, res) => {
   switch (req.method) {
     case 'GET':
-      if (Object.keys(req.query).length) {
+      if (Object.keys(req.query).length > 0) {
         await getProducts(req, res);
       } else {
         await getAllProducts(req, res);
@@ -50,7 +50,7 @@ class APIfeatures {
 
   paginating() {
     const page = +this.queryString.page || 1;
-    const limit = +this.queryString.limit || 8;
+    const limit = +this.queryString.limit || 4;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;

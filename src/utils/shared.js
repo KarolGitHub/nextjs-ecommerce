@@ -6,9 +6,19 @@ export const currencySymbol = {
 };
 
 export const breakpoints = {
-  md: 637,
-  lg: 927,
-  xl: 1217,
+  lg: 910,
+  xl: 1200,
+};
+
+export const fetchProductsLimit = (width) => {
+  switch (true) {
+    case width < breakpoints.lg:
+      return 8;
+    case width < breakpoints.xl:
+      return 16;
+    default:
+      return 32;
+  }
 };
 
 export function uniqueKeyValues(arr, key) {

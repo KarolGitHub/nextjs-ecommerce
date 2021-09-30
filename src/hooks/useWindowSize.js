@@ -5,8 +5,8 @@ export const useWindowSize = () => {
 
   const getSize = useCallback(() => {
     return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined,
+      width: isClient ? document.documentElement.clientWidth : undefined,
+      height: isClient ? document.documentElement.clientHeight : undefined,
     };
   }, [isClient]);
 
