@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/dist/client/router';
 
-import { getData } from '../../utils/fetchData';
+import { getData, currencySymbol } from '../../utils';
 import { BasicLayout } from '../../components';
-import { currencySymbol } from '../../utils/shared';
 import { useGlobalState } from '../../context/GlobalState';
 import { addToCart } from '../../store/Actions';
 

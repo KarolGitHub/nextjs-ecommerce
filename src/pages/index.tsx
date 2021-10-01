@@ -5,9 +5,12 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { BasicLayout, Filter, Placeholder, ProductItem } from '../components';
-import { getData } from '../utils/fetchData';
-import { fetchProductsLimit, uniqueKeyValues } from '../utils/shared';
-import filterSearch from '../utils/filterSearch';
+import {
+  getData,
+  fetchProductsLimit,
+  uniqueKeyValues,
+  filterSearch,
+} from '../utils';
 import { useGlobalState } from '../context/GlobalState';
 import { useWindowSize } from '../hooks';
 

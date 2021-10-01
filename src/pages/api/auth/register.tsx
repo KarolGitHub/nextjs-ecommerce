@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import connectDB from '../../../utils/connectDB';
+import { connectDB, valid } from '../../../utils';
 import Users from '../../../models/userModel';
-import valid from '../../../utils/valid';
 import bcrypt from 'bcrypt';
 
 connectDB();

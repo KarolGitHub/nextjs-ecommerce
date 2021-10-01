@@ -4,8 +4,7 @@ import Link from 'next/link';
 
 import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import valid from '../utils/valid';
-import { patchData } from '../utils/fetchData';
+import { valid, patchData } from '../utils';
 import { AuthCheck } from '../components/AuthCheck/AuthCheck';
 import Spinner from '../components/UI/Spinner';
 

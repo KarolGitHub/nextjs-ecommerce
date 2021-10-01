@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
-import filterSearch from '../../utils/filterSearch';
+import { filterSearch } from '../../utils';
 
 type Props = {
   categories: Category[];

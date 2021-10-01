@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { BasicLayout, CartItem } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import { getData, postData } from '../utils/fetchData';
+import { getData, postData } from '../utils';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useGlobalState();

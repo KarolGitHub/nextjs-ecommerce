@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcrypt';
 
-import connectDB from '../../../utils/connectDB';
 import Users from '../../../models/userModel';
 import {
+  connectDB,
   createAccessToken,
   createRefreshToken,
-} from '../../../utils/generateToken';
+} from '../../../utils';
 
 connectDB();
 

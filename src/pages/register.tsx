@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 
 import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import valid from '../utils/valid';
-import { postData } from '../utils/fetchData';
+import { valid, postData } from '../utils';
 
 const initialState: RegisterPayload = {
   name: '',

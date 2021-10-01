@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
-import connectDB from '../../../utils/connectDB';
 import Users from '../../../models/userModel';
-import { createAccessToken } from '../../../utils/generateToken';
+import { connectDB, createAccessToken } from '../../../utils';
 
 connectDB();
 

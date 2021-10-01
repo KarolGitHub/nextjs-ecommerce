@@ -1,4 +1,4 @@
-import connectDB from '../../../utils/connectDB';
+import { connectDB } from '../../../utils';
 import Products from '../../../models/productsModel';
 
 connectDB();

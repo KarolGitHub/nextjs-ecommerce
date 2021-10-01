@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
 import reducers from '../store/Reducers';
-import { getData } from '../utils/fetchData';
+import { getData } from '../utils';
 
 const initialState: GlobalState = {
   notify: {},

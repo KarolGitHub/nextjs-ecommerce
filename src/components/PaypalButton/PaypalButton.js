@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useGlobalState } from '../../context/GlobalState';
-import { patchData } from '../../utils/fetchData';
+import { patchData } from '../../utils';
 import { updateItem } from '../../store/Actions';
 
 const PaypalButton = ({ order }) => {

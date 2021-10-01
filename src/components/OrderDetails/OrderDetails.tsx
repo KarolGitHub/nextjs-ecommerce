@@ -2,8 +2,7 @@ import Link from 'next/link';
 
 import { PaypalButton } from '..';
 import { updateItem } from '../../store/Actions';
-import { patchData } from '../../utils/fetchData';
-import { currencySymbol } from '../../utils/shared';
+import { patchData, currencySymbol } from '../../utils';
 
 type Props = {
   data: OrderData[];

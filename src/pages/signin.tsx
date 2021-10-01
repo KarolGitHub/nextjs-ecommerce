@@ -6,7 +6,7 @@ import Cookie from 'js-cookie';
 
 import { BasicLayout } from '../components';
 import { useGlobalState } from '../context/GlobalState';
-import { postData } from '../utils/fetchData';
+import { postData } from '../utils';
 
 const initialState: LoginPayload = {
   email: '',
