@@ -9,3 +9,4 @@ export { default as CartItem } from './CartItem/CartItem';
 export { default as PaypalButton } from './PaypalButton/PaypalButton';
 export { default as OrderDetails } from './OrderDetails/OrderDetails';
 export { default as Filter } from './Filter/Filter';
+export { default as Placeholder } from './UI/Placeholder';

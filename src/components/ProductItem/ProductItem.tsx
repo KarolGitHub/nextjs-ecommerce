@@ -24,7 +24,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <div className="card" style={{ width: '18rem' }}>
+    <div className="card m-2">
       <img
         src={product.imageUrl}
         className="card-img-top"

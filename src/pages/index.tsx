@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-import { BasicLayout, Filter, ProductItem } from '../components';
+import { BasicLayout, Filter, Placeholder, ProductItem } from '../components';
 import { getData } from '../utils/fetchData';
 import { fetchProductsLimit, uniqueKeyValues } from '../utils/shared';
 import filterSearch from '../utils/filterSearch';
@@ -29,10 +29,6 @@ const Home: React.FC<Props> = (props) => {
 
   const { width } = useWindowSize();
   const limit = fetchProductsLimit(width);
-
-  const loadMoreHandler = () => {
-    filterSearch({ router, limit, page: +props.page + 1 });
-  };
 
   useEffect(() => {
     getData('product').then((res) => {
@@ -63,6 +59,8 @@ const Home: React.FC<Props> = (props) => {
     const observerHandler: IntersectionObserverCallback = (entities) => {
       const target = entities[0];
       if (target.isIntersecting) {
+        const placeholderProducts = new Array(limit).fill({});
+        setProducts((prevState) => [...prevState, ...placeholderProducts]);
         filterSearch({ router, limit, page: +props.page + 1 });
       }
     };
@@ -86,9 +84,14 @@ const Home: React.FC<Props> = (props) => {
 
       {props.result ? (
         <div className="products">
-          {products.map((product) => (
-            <ProductItem key={product._id} product={product} />
-          ))}
+          {<ProductItem key={products[1]._id} product={products[1]} />}
+          {products.map((product) =>
+            Object.keys(product).length ? (
+              <ProductItem key={product._id} product={product} />
+            ) : (
+              <Placeholder key={product._id} />
+            )
+          )}
         </div>
       ) : (
         <div className="no-products">
@@ -102,12 +105,11 @@ const Home: React.FC<Props> = (props) => {
         </div>
       )}
       {props.result >= +props.page * +props.limit ? (
-        <button
-          className="btn btn-outline-info d-block mx-auto mb-4"
-          ref={loadMoreRef}
-          onClick={loadMoreHandler}>
-          Load more
-        </button>
+        <div className="loading" ref={loadMoreRef}>
+          <svg width="115" height="90" viewBox="25 25 50 50">
+            <circle cx="50" cy="50" r="20" fill="none" strokeWidth="2" />
+          </svg>
+        </div>
       ) : (
         ''
       )}
