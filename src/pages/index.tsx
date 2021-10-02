@@ -27,7 +27,7 @@ const Home: React.FC<Props> = (props) => {
 
   const { dispatch } = useGlobalState();
 
-  const loadMoreRef = useRef(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   const { width } = useWindowSize();
@@ -87,7 +87,6 @@ const Home: React.FC<Props> = (props) => {
 
       {props.result ? (
         <div className="products">
-          {<ProductItem key={products[1]._id} product={products[1]} />}
           {products.map((product) =>
             Object.keys(product).length ? (
               <ProductItem key={product._id} product={product} />
@@ -108,7 +107,7 @@ const Home: React.FC<Props> = (props) => {
         </div>
       )}
       {props.result >= +props.page * +props.limit ? (
-        <div className="loading" ref={loadMoreRef}>
+        <div className="loading" ref={(el) => (loadMoreRef.current = el)}>
           <svg width="115" height="90" viewBox="25 25 50 50">
             <circle cx="50" cy="50" r="20" fill="none" strokeWidth="2" />
           </svg>
@@ -133,8 +132,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       products: res.products,
       result: res.result,
-      page: page,
-      limit: limit,
+      page,
+      limit,
     },
   };
 };

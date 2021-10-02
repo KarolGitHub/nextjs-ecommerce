@@ -59,11 +59,13 @@ const Filter: React.FC<Props> = ({ categories, limit }) => {
         </select>
       </div>
 
-      <form autoComplete="off" className="mt-2 col-md-8 px-0">
+      <form
+        autoComplete="off"
+        className="mt-2 col-md-8 px-0"
+        onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           className="form-control"
-          list="title_product"
           ref={(el) => (searchInputRef.current = el)}
           onChange={throttleSearchHandler}
         />
