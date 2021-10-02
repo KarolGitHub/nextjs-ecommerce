@@ -2,24 +2,28 @@ export const addToCart = (
   product: ProductData,
   cart: ProductData[]
 ): Action => {
-  if (product.status == 'Unavailable') {
-    return {
-      type: 'NOTIFY',
-      payload: { error: 'This product is currently unavailable' },
-    };
+  switch (true) {
+    case product.status == 'Unavailable':
+      return {
+        type: 'NOTIFY',
+        payload: { error: 'This product is currently unavailable' },
+      };
+    case !product.quantity:
+      return {
+        type: 'NOTIFY',
+        payload: { error: 'This product is out of stock' },
+      };
+    case cart.findIndex((item) => item._id === product._id) > -1:
+      return {
+        type: 'NOTIFY',
+        payload: { error: 'This product is already in cart' },
+      };
+    default:
+      return {
+        type: 'ADD_TO_CART',
+        payload: [...cart, { ...product, amount: product.amount ?? 1 }],
+      };
   }
-
-  if (!product.quantity) {
-    return {
-      type: 'NOTIFY',
-      payload: { error: 'This product is out of stock' },
-    };
-  }
-
-  return {
-    type: 'ADD_TO_CART',
-    payload: [...cart, { ...product, amount: product.amount ?? 1 }],
-  };
 };
 
 export const increaseItemAmount = (
