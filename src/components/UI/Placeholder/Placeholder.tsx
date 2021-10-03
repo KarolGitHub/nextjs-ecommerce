@@ -4,7 +4,7 @@ const Placeholder: React.FC = () => {
   return (
     <div className="card m-2" aria-hidden="true">
       <svg
-        className="bd-placeholder-img card-img-top"
+        className="bd-placeholder-img card-img-top product-thumbnail"
         width="100%"
         height="180"
         xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,6 @@ const Placeholder: React.FC = () => {
         focusable="false">
         <rect width="100%" height="100%" fill="#868e96"></rect>
       </svg>
-      <rect width="100%" height="100%" fill="#868e96" />
       <div className="card-body">
         <h5 className="card-title placeholder-glow">
           <span className="placeholder col-6" />

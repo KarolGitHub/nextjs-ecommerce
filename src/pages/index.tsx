@@ -87,11 +87,11 @@ const Home: React.FC<Props> = (props) => {
 
       {props.result ? (
         <div className="products">
-          {products.map((product) =>
+          {products.map((product, index) =>
             Object.keys(product).length ? (
               <ProductItem key={product._id} product={product} />
             ) : (
-              <Placeholder key={product._id} />
+              <Placeholder key={index} />
             )
           )}
         </div>
