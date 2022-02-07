@@ -82,10 +82,10 @@ const bootstrapJS = (
 );
 
 const fontAwesomeScript = (
-  <script
+  <link
     key="fontAwesomeScript"
-    defer
-    src="https://kit.fontawesome.com/a076d05399.js"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.css"
+    rel="stylesheet"
     crossOrigin="anonymous"
   />
 );
@@ -93,7 +93,8 @@ const PaypalUrlScript = (
   <script
     key="PaypalUrlScript"
     defer
-    src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&currency=EUR`}></script>
+    src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&currency=EUR`}
+  />
 );
 
 const mergedLinks = [
